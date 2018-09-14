@@ -1,5 +1,5 @@
 package unl.cse.movieApp.phase1;
-
+//This is a test comment
 public class Address {
 	String street = null;
 	String city = null;
