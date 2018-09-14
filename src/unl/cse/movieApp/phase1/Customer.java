@@ -1,5 +1,5 @@
 package unl.cse.movieApp.phase1;
-
+//Comment here
 public class Customer {
 	String customerCode = null;
 	String primaryContact = null;
