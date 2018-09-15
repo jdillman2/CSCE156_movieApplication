@@ -1,12 +1,12 @@
-package unl.cse.movieApp.phase1;
+package entities;
 
 public class Person {
 	
-	String personCode = null;
-	String lName = null;
-	String fName = null;
-	Address personAddress = new Address();
-	String emails[] = null;
+	String personCode;
+	String lName;
+	String fName;
+	Address personAddress;
+	String emails[];
 	public Person(String personCode, String lName, String fName, Address personAddress, String[] emails) {
 		super();
 		this.personCode = personCode;

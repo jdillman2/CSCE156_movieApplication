@@ -1,11 +1,11 @@
-package unl.cse.movieApp.phase1;
+package entities;
 //This is a test comment
 public class Address {
-	String street = null;
-	String city = null;
-	String state = null;
-	String zip = null;
-	String country = null;
+	private String street = null;
+	private String city = null;
+	private String state = null;
+	private String zip = null;
+	private String country = null;
 	
 	public Address(String street, String city, String state, String zip, String country) {
 		super();
@@ -14,10 +14,6 @@ public class Address {
 		this.state = state;
 		this.zip = zip;
 		this.country = country;
-	}
-	
-	public Address() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getStreet() {
