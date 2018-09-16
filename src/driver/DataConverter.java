@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import entities.Person;
 import readers.PersonsReader;
+import writers.PersonsXMLWriter;
 
 public class DataConverter {
 
@@ -12,6 +13,8 @@ public class DataConverter {
 		ArrayList<Person> person = null;
 		PersonsReader p = new PersonsReader();
 		person = p.readPersons();
+		PersonsXMLWriter writer = new PersonsXMLWriter();
+		writer.xmlConverter(person);
 	}
 
 }

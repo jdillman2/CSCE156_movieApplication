@@ -16,10 +16,11 @@ public class PersonsXMLWriter {
 			PrintWriter pw = new PrintWriter("data/Persons.xml");
 			
 			xstream.alias("person",  Person.class);
+			xstream.alias("email", String.class);
 			pw.println("<persons>");
 			for(Person p : arrayList) {
 				String xmlPerson = xstream.toXML(p);
-				pw.write(xmlPerson);
+				pw.println(xmlPerson);
 			}
 			pw.println("</persons>");
 			pw.close();
