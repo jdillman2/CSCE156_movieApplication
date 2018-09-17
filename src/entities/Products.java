@@ -1,6 +1,6 @@
 package entities;
 
-public class Products {
+public abstract class Products {
 	private String productCode;
 	private String productType;
 	private double price;

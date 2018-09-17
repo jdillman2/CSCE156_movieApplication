@@ -1,0 +1,104 @@
+<products>
+<seasonPass>
+  <productCode>b29e</productCode>
+  <productType>S</productType>
+  <price>120.0</price>
+  <name>Winter Special</name>
+  <startDate>2016-12-13</startDate>
+  <endDate>2017-01-07</endDate>
+</seasonPass>
+<Refreshment>
+  <productCode>ff23</productCode>
+  <productType>R</productType>
+  <price>4.99</price>
+  <name>Labatt Beer-20oz</name>
+</Refreshment>
+<movie>
+  <productCode>fp12</productCode>
+  <productType>M</productType>
+  <price>21.5</price>
+  <movieTime>2016-10-21 13:10</movieTime>
+  <title>A Monster Calls</title>
+  <theatreAddress>
+    <street>3555 South 140th Plaza</street>
+    <city>Omaha</city>
+    <state> NE</state>
+    <zip> 68144</zip>
+    <country> USA</country>
+  </theatreAddress>
+  <theatreNo>2A</theatreNo>
+</movie>
+<parkingPass>
+  <productCode>90fa</productCode>
+  <productType>P</productType>
+  <price>25.0</price>
+</parkingPass>
+<movie>
+  <productCode>1239</productCode>
+  <productType>M</productType>
+  <price>11.0</price>
+  <movieTime>2016-09-13 15:30</movieTime>
+  <title>The Wild Life</title>
+  <theatreAddress>
+    <street>755 Willard Drive</street>
+    <city>Ashwaubenon</city>
+    <state> WI</state>
+    <zip> 54304</zip>
+    <country> USA</country>
+  </theatreAddress>
+  <theatreNo>12F</theatreNo>
+</movie>
+<movie>
+  <productCode>782g</productCode>
+  <productType>M</productType>
+  <price>25.0</price>
+  <movieTime>2016-11-10 10:00</movieTime>
+  <title>Shut In</title>
+  <theatreAddress>
+    <street>6301 University Ave</street>
+    <city>Cedar Falls</city>
+    <state> IA</state>
+    <zip> 50613</zip>
+    <country> USA</country>
+  </theatreAddress>
+  <theatreNo>32D</theatreNo>
+</movie>
+<parkingPass>
+  <productCode>3289</productCode>
+  <productType>P</productType>
+  <price>55.0</price>
+</parkingPass>
+<Refreshment>
+  <productCode>32f4</productCode>
+  <productType>R</productType>
+  <price>5.5</price>
+  <name>Caramel Popcorn</name>
+</Refreshment>
+<seasonPass>
+  <productCode>3y92</productCode>
+  <productType>S</productType>
+  <price>58.0</price>
+  <name>BlackFriday Deal</name>
+  <startDate>2016-11-24</startDate>
+  <endDate>2016-11-29</endDate>
+</seasonPass>
+<parkingPass>
+  <productCode>90fb</productCode>
+  <productType>P</productType>
+  <price>20.0</price>
+</parkingPass>
+<seasonPass>
+  <productCode>xer4</productCode>
+  <productType>S</productType>
+  <price>185.0</price>
+  <name>FiveWeeks-Unlimited</name>
+  <startDate>2016-10-07</startDate>
+  <endDate>2016-11-11</endDate>
+</seasonPass>
+<Refreshment>
+  <productCode>yp23</productCode>
+  <productType>R</productType>
+  <price>9.0</price>
+  <name>Double Cheeseburger</name>
+</Refreshment>
+</products>
