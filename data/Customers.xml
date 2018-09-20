@@ -1,0 +1,80 @@
+<customers>
+<customer>
+  <customerCode>C001</customerCode>
+  <type>G</type>
+  <primaryContactCode>231</primaryContactCode>
+  <name>Clark Consultants</name>
+  <address>
+    <street>259 Concorde Suites</street>
+    <city>Lincoln</city>
+    <state>NE</state>
+    <zip>68588-0115</zip>
+    <country>USA</country>
+  </address>
+</customer>
+<customer>
+  <customerCode>C002</customerCode>
+  <type>S</type>
+  <primaryContactCode>944c</primaryContactCode>
+  <name>CAS International Fellows</name>
+  <address>
+    <street>1223 Oldfather Hall</street>
+    <city>Lincoln</city>
+    <state>NE</state>
+    <zip>68503</zip>
+    <country>USA</country>
+  </address>
+</customer>
+<customer>
+  <customerCode>C003</customerCode>
+  <type>S</type>
+  <primaryContactCode>306a</primaryContactCode>
+  <name>Valueless Club</name>
+  <address>
+    <street>123 Venture Way</street>
+    <city>Culver City</city>
+    <state>CA</state>
+    <zip>90230</zip>
+    <country>USA</country>
+  </address>
+</customer>
+<customer>
+  <customerCode>C004</customerCode>
+  <type>G</type>
+  <primaryContactCode>321f</primaryContactCode>
+  <name>Stony Brook</name>
+  <address>
+    <street>9800 Savage Rd</street>
+    <city>Fort Meade</city>
+    <state>MD</state>
+    <zip>20755</zip>
+    <country>USA</country>
+  </address>
+</customer>
+<customer>
+  <customerCode>C005</customerCode>
+  <type>G</type>
+  <primaryContactCode>bbchar</primaryContactCode>
+  <name>Hewlett Industries</name>
+  <address>
+    <street>1060 West Addison</street>
+    <city>Chicago</city>
+    <state>IL</state>
+    <zip>60601</zip>
+    <country>USA</country>
+  </address>
+</customer>
+<customer>
+  <customerCode>C006</customerCode>
+  <type>S</type>
+  <primaryContactCode>321dr</primaryContactCode>
+  <name>Gregory Smith</name>
+  <address>
+    <street>456 West 7th St.</street>
+    <city>Omaha</city>
+    <state>NE</state>
+    <zip>68500</zip>
+    <country>USA</country>
+  </address>
+</customer>
+</customers>
