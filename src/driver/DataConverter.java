@@ -6,6 +6,7 @@ import entities.Customer;
 import entities.Person;
 import entities.Products;
 import readers.FlatFileReader;
+import writers.JSONWriter;
 import writers.XMLWriter;
 
 public class DataConverter {
@@ -28,6 +29,11 @@ public class DataConverter {
 		writer.personXMLConverter(person);
 		writer.CustomerXMLConverter(customer);
 		writer.ProductsXMLConverter(products);
+		
+		JSONWriter jsonWriter = new JSONWriter();
+		jsonWriter.personJSONConverter(person);
+		jsonWriter.CustomerJSONConverter(customer);
+		jsonWriter.ProductsJSONConverter(products);
 	}
 
 }

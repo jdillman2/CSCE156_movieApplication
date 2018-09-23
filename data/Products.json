@@ -1,0 +1,93 @@
+{"products":[
+{
+  "name": "Winter Special",
+  "startDate": "12-13-2016",
+  "endDate": "01-07-2017",
+  "productCode": "b29e",
+  "productType": "S",
+  "price": 120.0
+},{
+  "name": "Labatt Beer-20oz",
+  "productCode": "ff23",
+  "productType": "R",
+  "price": 4.99
+},{
+  "movieTime": "21-10-2016 13:10",
+  "title": "A Monster Calls",
+  "theatreAddress": {
+    "street": "3555 South 140th Plaza",
+    "city": "Omaha",
+    "state": " NE",
+    "zip": " 68144",
+    "country": " USA"
+  },
+  "theatreNo": "2A",
+  "productCode": "fp12",
+  "productType": "M",
+  "price": 21.5
+},{
+  "productCode": "90fa",
+  "productType": "P",
+  "price": 25.0
+},{
+  "movieTime": "13-09-2016 15:30",
+  "title": "The Wild Life",
+  "theatreAddress": {
+    "street": "755 Willard Drive",
+    "city": "Ashwaubenon",
+    "state": " WI",
+    "zip": " 54304",
+    "country": " USA"
+  },
+  "theatreNo": "12F",
+  "productCode": "1239",
+  "productType": "M",
+  "price": 11.0
+},{
+  "movieTime": "10-11-2016 10:00",
+  "title": "Shut In",
+  "theatreAddress": {
+    "street": "6301 University Ave",
+    "city": "Cedar Falls",
+    "state": " IA",
+    "zip": " 50613",
+    "country": " USA"
+  },
+  "theatreNo": "32D",
+  "productCode": "782g",
+  "productType": "M",
+  "price": 25.0
+},{
+  "productCode": "3289",
+  "productType": "P",
+  "price": 55.0
+},{
+  "name": "Caramel Popcorn",
+  "productCode": "32f4",
+  "productType": "R",
+  "price": 5.5
+},{
+  "name": "BlackFriday Deal",
+  "startDate": "11-24-2016",
+  "endDate": "11-29-2016",
+  "productCode": "3y92",
+  "productType": "S",
+  "price": 58.0
+},{
+  "productCode": "90fb",
+  "productType": "P",
+  "price": 20.0
+},{
+  "name": "FiveWeeks-Unlimited",
+  "startDate": "10-07-2016",
+  "endDate": "11-11-2016",
+  "productCode": "xer4",
+  "productType": "S",
+  "price": 185.0
+},{
+  "name": "Double Cheeseburger",
+  "productCode": "yp23",
+  "productType": "R",
+  "price": 9.0
+}
+]}

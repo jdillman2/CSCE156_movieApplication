@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import com.thoughtworks.xstream.XStream;
-
 import entities.Customer;
 import entities.Movie;
 import entities.ParkingPass;
@@ -66,6 +65,7 @@ public class XMLWriter {
 			xstream.alias("seasonPass", SeasonPass.class);
 			xstream.alias("parkingPass", ParkingPass.class);
 			xstream.alias("Refreshment", Refreshment.class);
+			
 			pw.println("<products>");
 			for(Products p : arrayList) {
 				String xmlPerson = xstream.toXML(p);

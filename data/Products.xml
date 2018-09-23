@@ -4,8 +4,22 @@
   <productType>S</productType>
   <price>120.0</price>
   <name>Winter Special</name>
-  <startDate>2016-12-13</startDate>
-  <endDate>2017-01-07</endDate>
+  <startDate>
+    <iMillis>1481608800000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </startDate>
+  <endDate>
+    <iMillis>1483768800000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../startDate/iChronology"/>
+  </endDate>
 </seasonPass>
 <Refreshment>
   <productCode>ff23</productCode>
@@ -17,7 +31,18 @@
   <productCode>fp12</productCode>
   <productType>M</productType>
   <price>21.5</price>
-  <movieTime>2016-10-21 13:10</movieTime>
+  <movieTime>
+    <iMillis>1477073400000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </movieTime>
   <title>A Monster Calls</title>
   <theatreAddress>
     <street>3555 South 140th Plaza</street>
@@ -37,7 +62,18 @@
   <productCode>1239</productCode>
   <productType>M</productType>
   <price>11.0</price>
-  <movieTime>2016-09-13 15:30</movieTime>
+  <movieTime>
+    <iMillis>1473798600000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </movieTime>
   <title>The Wild Life</title>
   <theatreAddress>
     <street>755 Willard Drive</street>
@@ -52,7 +88,18 @@
   <productCode>782g</productCode>
   <productType>M</productType>
   <price>25.0</price>
-  <movieTime>2016-11-10 10:00</movieTime>
+  <movieTime>
+    <iMillis>1478793600000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </movieTime>
   <title>Shut In</title>
   <theatreAddress>
     <street>6301 University Ave</street>
@@ -79,8 +126,22 @@
   <productType>S</productType>
   <price>58.0</price>
   <name>BlackFriday Deal</name>
-  <startDate>2016-11-24</startDate>
-  <endDate>2016-11-29</endDate>
+  <startDate>
+    <iMillis>1479967200000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </startDate>
+  <endDate>
+    <iMillis>1480399200000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../startDate/iChronology"/>
+  </endDate>
 </seasonPass>
 <parkingPass>
   <productCode>90fb</productCode>
@@ -92,8 +153,22 @@
   <productType>S</productType>
   <price>185.0</price>
   <name>FiveWeeks-Unlimited</name>
-  <startDate>2016-10-07</startDate>
-  <endDate>2016-11-11</endDate>
+  <startDate>
+    <iMillis>1475816400000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </startDate>
+  <endDate>
+    <iMillis>1478844000000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../startDate/iChronology"/>
+  </endDate>
 </seasonPass>
 <Refreshment>
   <productCode>yp23</productCode>
