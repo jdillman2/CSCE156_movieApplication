@@ -18,7 +18,7 @@ public class FlatFileReader {
 	public ArrayList<Person> readPersons(){
 		Scanner s = null;
     	try {
-			s = new Scanner(new File("data/Persons.dat"));
+			s = new Scanner(new File("data/Persons_2.dat"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -43,7 +43,7 @@ public class FlatFileReader {
 	public ArrayList<Customer> readCustomers(){
 		Scanner s = null;
     	try {
-			s = new Scanner(new File("data/Customers.dat"));
+			s = new Scanner(new File("data/Customers_2.dat"));
 		} 
     	catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -81,7 +81,7 @@ public class FlatFileReader {
 	public ArrayList<Products> readProducts() {
 		Scanner s = null;
     	try {
-			s = new Scanner(new File("data/Products.dat"));
+			s = new Scanner(new File("data/Products_2.dat"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -95,10 +95,10 @@ public class FlatFileReader {
     		case "M": 
     			String[] a = product[4].split(",");
     			Address theatreAddress = new Address(a[0],a[1],a[2],a[3],a[4]);
-    			p.add(new Movie(product[0],product[1],Double.parseDouble(product[6]),product[2],product[3],theatreAddress, product[5]));
+    			p.add(new Movie(product[0],product[1],Double.parseDouble(product[6]),product[2].trim(),product[3],theatreAddress, product[5]));
     			break;
     		case "S":
-    			p.add(new SeasonPass(product[0],product[1],Double.parseDouble(product[5]),product[2],product[3],product[4]));
+    			p.add(new SeasonPass(product[0],product[1],Double.parseDouble(product[5]),product[2],product[3].trim(),product[4].trim()));
     			break;
     		case "P":
     			p.add(new ParkingPass(product[0],product[1],Double.parseDouble(product[2])));

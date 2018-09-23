@@ -7,7 +7,6 @@ import entities.Person;
 import entities.Products;
 import readers.FlatFileReader;
 import writers.JSONWriter;
-import writers.XMLWriter;
 
 public class DataConverter {
 
@@ -24,11 +23,7 @@ public class DataConverter {
 		customer = reader.readCustomers();
 		products = reader.readProducts();
 		
-		//Instantiate XMLwriter to write objects to XML
-		XMLWriter writer = new XMLWriter();
-		writer.personXMLConverter(person);
-		writer.CustomerXMLConverter(customer);
-		writer.ProductsXMLConverter(products);
+		//Instantiate JSONwriter to write objects to JSON
 		
 		JSONWriter jsonWriter = new JSONWriter();
 		jsonWriter.personJSONConverter(person);

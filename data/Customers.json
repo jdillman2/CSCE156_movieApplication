@@ -1,173 +1,83 @@
 {"customers":
 [
   {
-    "customerCode": "C001",
+    "customerCode": "C007",
     "type": "G",
-    "primaryContactCode": "231",
-    "primaryContact": {
-      "personCode": "231",
-      "lName": "Baker",
-      "fName": "Tom",
-      "personAddress": {
-        "street": "1 Blue Jays Way",
-        "city": "Toronto",
-        "state": "ON",
-        "zip": "M5V 1J1",
-        "country": "Canada"
-      },
-      "emails": [
-        "famousdoc@who.com",
-        "tbaker@cse.unl.edu",
-        "mostfamous@whovian.com",
-        "thedoctor@bbc.com"
-      ]
-    },
-    "name": "Clark Consultants",
+    "primaryContactCode": "486",
+    "name": "Nelnet",
     "address": {
-      "street": "259 Concorde Suites",
+      "street": "584 Berry Ridge Ave",
       "city": "Lincoln",
       "state": "NE",
-      "zip": "68588-0115",
+      "zip": "68588-0745",
       "country": "USA"
     }
   },
   {
-    "customerCode": "C002",
+    "customerCode": "C008",
+    "type": "G",
+    "primaryContactCode": "222e",
+    "name": "NRC Health",
+    "address": {
+      "street": "4887 Georgia St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "68977",
+      "country": "USA"
+    }
+  },
+  {
+    "customerCode": "C009",
+    "type": "G",
+    "primaryContactCode": "800p",
+    "name": "Ameritas",
+    "address": {
+      "street": "4865 Happy Place",
+      "city": "Boston",
+      "state": "MA",
+      "zip": "90320",
+      "country": "USA"
+    }
+  },
+  {
+    "customerCode": "C0010",
+    "type": "G",
+    "primaryContactCode": "300h",
+    "name": "Midwest Holdings",
+    "address": {
+      "street": "399 Dudley St",
+      "city": "Anchorage",
+      "state": "AK",
+      "zip": "20577",
+      "country": "USA"
+    }
+  },
+  {
+    "customerCode": "C0011",
     "type": "S",
-    "primaryContactCode": "944c",
+    "primaryContactCode": "488b",
     "primaryContact": {
-      "personCode": "944c",
-      "lName": "Castro",
-      "fName": "Starlin",
+      "personCode": "488b",
+      "lName": "Clark",
+      "fName": "Ann",
       "personAddress": {
-        "street": "1060 West Addison Street",
+        "street": "1593 Medowlark St",
         "city": "Chicago",
         "state": "IL",
-        "zip": "60613",
+        "zip": "60601",
         "country": "USA"
       },
       "emails": [
-        "scastro@cubs.com",
-        "starlin_castro13@gmail.com"
+        "aclark@gmail.com",
+        "annClark@hotmail.com"
       ]
     },
-    "name": "CAS International Fellows",
+    "name": "Ann Clark",
     "address": {
-      "street": "1223 Oldfather Hall",
-      "city": "Lincoln",
-      "state": "NE",
-      "zip": "68503",
-      "country": "USA"
-    }
-  },
-  {
-    "customerCode": "C003",
-    "type": "S",
-    "primaryContactCode": "306a",
-    "primaryContact": {
-      "personCode": "306a",
-      "lName": "Sampson",
-      "fName": "Brock",
-      "personAddress": {
-        "street": "123 N 1st Street",
-        "city": "Omaha",
-        "state": "NE",
-        "zip": "68116",
-        "country": "USA"
-      },
-      "emails": [
-        "brock_f_sampson@gmail.com",
-        "bsampson@venture.com"
-      ]
-    },
-    "name": "Valueless Club",
-    "address": {
-      "street": "123 Venture Way",
-      "city": "Culver City",
-      "state": "CA",
-      "zip": "90230",
-      "country": "USA"
-    }
-  },
-  {
-    "customerCode": "C004",
-    "type": "G",
-    "primaryContactCode": "321f",
-    "primaryContact": {
-      "personCode": "321f",
-      "lName": "Fox",
-      "fName": "Bud",
-      "personAddress": {
-        "street": "321 Bronx Street",
-        "city": "New York",
-        "state": "NY",
-        "zip": "10004",
-        "country": "USA"
-      },
-      "emails": [
-        "bfox@gmail.com",
-        "csheen@crazy.net"
-      ]
-    },
-    "name": "Stony Brook",
-    "address": {
-      "street": "9800 Savage Rd",
-      "city": "Fort Meade",
-      "state": "MD",
-      "zip": "20755",
-      "country": "USA"
-    }
-  },
-  {
-    "customerCode": "C005",
-    "type": "G",
-    "primaryContactCode": "bbchar",
-    "primaryContact": {
-      "personCode": "bbchar",
-      "lName": "Ehrmantraut",
-      "fName": "Kaylee",
-      "personAddress": {
-        "street": "800 West 7th Street",
-        "city": "Albuquerque",
-        "state": "NM",
-        "zip": "87105",
-        "country": "USA"
-      }
-    },
-    "name": "Hewlett Industries",
-    "address": {
-      "street": "1060 West Addison",
+      "street": "1593 Medowlark St",
       "city": "Chicago",
       "state": "IL",
       "zip": "60601",
-      "country": "USA"
-    }
-  },
-  {
-    "customerCode": "C006",
-    "type": "S",
-    "primaryContactCode": "321dr",
-    "primaryContact": {
-      "personCode": "321dr",
-      "lName": "Baker",
-      "fName": "C.",
-      "personAddress": {
-        "street": "Avery Hall",
-        "city": "Lincoln",
-        "state": "NE",
-        "zip": "68503",
-        "country": "USA"
-      },
-      "emails": [
-        "dr@baker.com"
-      ]
-    },
-    "name": "Gregory Smith",
-    "address": {
-      "street": "456 West 7th St.",
-      "city": "Omaha",
-      "state": "NE",
-      "zip": "68500",
       "country": "USA"
     }
   }
