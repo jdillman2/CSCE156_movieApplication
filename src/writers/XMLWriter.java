@@ -9,7 +9,7 @@ import entities.Customer;
 import entities.Movie;
 import entities.ParkingPass;
 import entities.Person;
-import entities.Products;
+import entities.Product;
 import entities.Refreshment;
 import entities.SeasonPass;
 
@@ -56,22 +56,22 @@ public class XMLWriter {
 		}
 	}
 	
-	public void ProductsXMLConverter(ArrayList<Products> arrayList) {
+	public void ProductXMLConverter(ArrayList<Product> arrayList) {
 		XStream xstream = new XStream();
 		try {
-			PrintWriter pw = new PrintWriter("data/Products.xml");
+			PrintWriter pw = new PrintWriter("data/Product.xml");
 			
 			xstream.alias("movie",  Movie.class);
 			xstream.alias("seasonPass", SeasonPass.class);
 			xstream.alias("parkingPass", ParkingPass.class);
 			xstream.alias("Refreshment", Refreshment.class);
 			
-			pw.println("<products>");
-			for(Products p : arrayList) {
+			pw.println("<Product>");
+			for(Product p : arrayList) {
 				String xmlPerson = xstream.toXML(p);
 				pw.println(xmlPerson);
 			}
-			pw.println("</products>");
+			pw.println("</Product>");
 			pw.close();
 		}
 		catch(FileNotFoundException e) {

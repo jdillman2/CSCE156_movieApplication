@@ -7,10 +7,11 @@ import java.util.Scanner;
 
 import entities.Address;
 import entities.Customer;
+import entities.Invoice;
 import entities.Movie;
 import entities.ParkingPass;
 import entities.Person;
-import entities.Products;
+import entities.Product;
 import entities.Refreshment;
 import entities.SeasonPass;
 
@@ -18,7 +19,7 @@ public class FlatFileReader {
 	public ArrayList<Person> readPersons(){
 		Scanner s = null;
     	try {
-			s = new Scanner(new File("data/Persons_2.dat"));
+			s = new Scanner(new File("data/Persons.dat"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -43,7 +44,7 @@ public class FlatFileReader {
 	public ArrayList<Customer> readCustomers(){
 		Scanner s = null;
     	try {
-			s = new Scanner(new File("data/Customers_2.dat"));
+			s = new Scanner(new File("data/Customers.dat"));
 		} 
     	catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -78,15 +79,15 @@ public class FlatFileReader {
 	return customerList;
 	}
 	
-	public ArrayList<Products> readProducts() {
+	public ArrayList<Product> readProduct() {
 		Scanner s = null;
     	try {
-			s = new Scanner(new File("data/Products_2.dat"));
+			s = new Scanner(new File("data/Product.dat"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
     	
-    	ArrayList<Products> p = new ArrayList<Products>();
+    	ArrayList<Product> p = new ArrayList<Product>();
     	s.nextLine();
     	while(s.hasNext()) {
     		String[] product = s.nextLine().split(";");
@@ -110,5 +111,60 @@ public class FlatFileReader {
     	}
     	s.close();
     	return p;
+	}
+	
+	public ArrayList<Invoice> readInvoices(){
+		Scanner s = null;
+    	try {
+			s = new Scanner(new File("data/Invoices.dat"));
+		} 
+    	catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+    	
+    	ArrayList<Invoice> invoiceList = new ArrayList<Invoice>();
+    	s.nextLine();
+    	while(s.hasNext()) {
+    		String[] invoice = s.nextLine().split(";");
+    		String invoiceCode = invoice[0];
+    		String customerCode = invoice[1];
+    		String personCode = invoice[2];
+    		String invoiceDate = invoice[3];
+    		String[] Product = invoice[4].split(",");
+    		
+    		//Find associated Person using primaryContact
+    		//Re-read personList using PersonsReader
+    		ArrayList<Customer> customerList = this.readCustomers();
+    		ArrayList<Person> personList = this.readPersons();
+    		ArrayList<Product> productList = this.readProduct();
+    		//Loop through personList to see if there is a matching code to the customer
+    		Customer customerMatch = null;
+    		Person personMatch = null;
+    		Product[] productMatch = new Product[Product.length];
+    		for(Customer c : customerList) {
+    			if (customerCode.equals(c.getCustomerCode())) {
+    				customerMatch = c;
+    			}
+    		}
+    		for(Person p : personList) {
+    			if (personCode.equals(p.getPersonCode())) {
+    				personMatch = p;
+    			}
+    		}
+    		for(Product pr : productList) {
+    			for(int i = 0; i < Product.length; i++) {
+    				String[] productData = Product[i].split(":");
+    				String productCode = productData[0];
+    				if(productCode.equals(pr.getProductCode())) {
+    					productMatch[i] = pr;
+    				}
+    			}
+    		}
+    		
+    		//Add customer to customerList
+    		invoiceList.add(new Invoice(invoiceCode, customerMatch, personMatch, invoiceDate, productMatch));
+    	}
+	s.close();
+	return invoiceList;
 	}
 }

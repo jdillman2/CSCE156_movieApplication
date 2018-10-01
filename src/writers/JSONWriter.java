@@ -16,7 +16,7 @@ import java.lang.reflect.Type;
 
 import entities.Customer;
 import entities.Person;
-import entities.Products;
+import entities.Product;
 
 public class JSONWriter {
 	
@@ -57,7 +57,7 @@ public class JSONWriter {
 		}
 	}
 	
-	public void ProductsJSONConverter(ArrayList<Products> arrayList) {
+	public void ProductJSONConverter(ArrayList<Product> arrayList) {
 		JsonSerializer<DateTime> movieSerializer = new JsonSerializer<DateTime>() {
 			  @Override
 			  public JsonElement serialize(DateTime dateTime, Type typeOfSrc, JsonSerializationContext 
@@ -80,13 +80,13 @@ public class JSONWriter {
 		};
 		
 		try {
-			PrintWriter pw = new PrintWriter("data/Products.json");
+			PrintWriter pw = new PrintWriter("data/Product.json");
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			Gson movieGson = new GsonBuilder().registerTypeAdapter(DateTime.class, movieSerializer).setPrettyPrinting().create();
 			Gson seasonPassGson = new GsonBuilder().registerTypeAdapter(DateTime.class, seasonPassSerializer).setPrettyPrinting().create();
-			pw.println("{\"products\":[");
+			pw.println("{\"Product\":[");
 			String jsonProduct = "";
-			for(Products p : arrayList) {
+			for(Product p : arrayList) {
 				if (p.getProductType().equals("M")) {
 					jsonProduct += movieGson.toJson(p) + ",";
 				}else if (p.getProductType().equals("S")) {

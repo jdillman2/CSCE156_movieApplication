@@ -4,13 +4,13 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-public class Movie extends Products {
+public class Movie extends Ticket {
 
 	private DateTime movieTime;
 	private String title;
 	private Address theatreAddress;
 	private String theatreNo;
-	
+	private double movieDiscount;
 	private DateTime convertDateString(String movieTime) {
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
 		DateTime dt = formatter.parseDateTime(movieTime);
@@ -24,6 +24,7 @@ public class Movie extends Products {
 		this.title = title;
 		this.theatreAddress = theatreAddress;
 		this.theatreNo = theatreNo;
+		this.setMovieDiscount();
 	}
 
 	public DateTime getMovieTime() {
@@ -57,6 +58,26 @@ public class Movie extends Products {
 	public void setTheatreNo(String theatreNo) {
 		this.theatreNo = theatreNo;
 	}
-	
-	
+
+	public double getMovieDiscount() {
+		return movieDiscount;
+	}
+
+	public void setMovieDiscount() {
+		if(this.movieTime.getDayOfWeek() == 2 || this.movieTime.getDayOfWeek() == 4) {
+			this.movieDiscount = .07;
+		}
+	}
+	public double getSubtotal() {
+		int quantity = super.getQuantity();
+		double price = super.getPrice();
+		double discount = 1 - this.movieDiscount;
+		return quantity * price * discount;
+	}
+	@Override 
+	public double getTAX() {
+		double subtotal = this.getSubtotal();
+		double tax = super.getTAX();
+		return subtotal * tax;
+	}
 }
