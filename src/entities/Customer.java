@@ -1,6 +1,6 @@
 package entities;
 
-public class Customer {
+public abstract class Customer {
 	private String customerCode;
 	private String type;
 	private String primaryContactCode;
@@ -70,5 +70,7 @@ public class Customer {
 		this.address = address;
 	}
 	
+	abstract double getCustomerFee();
+	abstract double getDiscountRate();
 	
 }

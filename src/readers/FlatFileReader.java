@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import entities.Address;
 import entities.Customer;
+import entities.General;
 import entities.Invoice;
 import entities.Movie;
 import entities.ParkingPass;
@@ -14,6 +15,7 @@ import entities.Person;
 import entities.Product;
 import entities.Refreshment;
 import entities.SeasonPass;
+import entities.Student;
 
 public class FlatFileReader {
 	public ArrayList<Person> readPersons(){
@@ -72,8 +74,15 @@ public class FlatFileReader {
     			}
     		}
     		
-    		//Add customer to customerList
-    		customerList.add(new Customer(customerCode, type, primaryContactCode, primaryContactMatch, name, address));
+    		if(type.equals("G")) {
+    			Customer c = new General(customerCode, type, primaryContactCode, primaryContactMatch, name, address);
+    			customerList.add(c);
+    		}
+    		else if (type.equals("S")) {
+    			Customer c = new Student(customerCode, type, primaryContactCode, primaryContactMatch, name, address);
+    			customerList.add(c);
+    		}
+    		
     	}
 	s.close();
 	return customerList;
