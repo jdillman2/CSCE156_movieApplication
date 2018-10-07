@@ -1,6 +1,6 @@
 package entities;
 
-public class Customer {
+public abstract class Customer {
 	private String customerCode;
 	private String type;
 	private String primaryContactCode;
@@ -17,15 +17,6 @@ public class Customer {
 		this.primaryContact = primaryContact;
 		this.name = name;
 		this.address = address;
-	}
-	
-	public Customer(Customer oldCustomer) {
-		this.customerCode = oldCustomer.customerCode;
-		this.type = oldCustomer.type;
-		this.primaryContactCode = oldCustomer.primaryContactCode;
-		this.primaryContact = new Person(oldCustomer.getPrimaryContact());
-		this.name = oldCustomer.name;
-		this.address = new Address(oldCustomer.getAddress());
 	}
 
 	
@@ -79,11 +70,7 @@ public class Customer {
 		this.address = address;
 	}
 	
-	public String getFullType() {
-		if(this.type.equals("S")) {
-			return "Student";
-		}else {
-			return "General";
-		}
-	}
+	abstract double getCustomerFee();
+	abstract double getDiscountRate();
+	
 }
