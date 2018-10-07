@@ -3,6 +3,7 @@ package entities;
 public class ParkingPass extends Service {
 	
 	private int numOfTickets;
+	private String matchingMovie = "";
 	
 	public double getDiscount() {
 		return 0.0;
@@ -15,6 +16,14 @@ public class ParkingPass extends Service {
 	public void setNumOfTickets(int numOfTickets) {
 		this.numOfTickets = numOfTickets;
 	}
+	
+	public String getMatchingMovie() {
+		return matchingMovie;
+	}
+
+	public void setMatchingMovie(String matchingMovie) {
+		this.matchingMovie = matchingMovie;
+	}
 
 	public ParkingPass(String productCode, String productType, double price) {
 		super(productCode, productType, price);
@@ -23,6 +32,7 @@ public class ParkingPass extends Service {
 	public ParkingPass(ParkingPass oldPass) {
 		super(oldPass.getProductCode(), oldPass.getProductType(), oldPass.getPrice());
 		this.numOfTickets = oldPass.getNumOfTickets();
+		this.matchingMovie = oldPass.getMatchingMovie();
 	}
 	
 	public double getSubtotal() {

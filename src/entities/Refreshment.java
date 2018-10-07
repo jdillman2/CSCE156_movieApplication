@@ -29,6 +29,7 @@ public class Refreshment extends Service{
 	public Refreshment(Refreshment oldRefreshment) {
 		super(oldRefreshment.getProductCode(), oldRefreshment.getProductType(), oldRefreshment.getPrice());
 		this.name = oldRefreshment.getName();
+		this.movieExists = oldRefreshment.isMovieExists();
 	}
 
 	public String getName() {

@@ -182,12 +182,23 @@ public class FlatFileReader {
     							String code = findMovie[0];
     							if(code.equals(matchingMovie)) {
     								p.setNumOfTickets(Integer.parseInt(findMovie[1]));
+    								p.setMatchingMovie(matchingMovie);
     							}
     						}
     						productMatch[i] = new ParkingPass(p);
     						productMatch[i].setQuantity(productQuantity);
     					}else if(pr instanceof Refreshment) {
     						Refreshment r = (Refreshment)pr;
+    						for(Product m: productList) {
+    							for(int k = 0; k < product.length; k++) {
+    								String[] findMovie = product[k].split(":");
+    			    				String code = findMovie[0];
+    								if(m.getProductCode().equals(code) && m instanceof Movie) {
+    									r.setMovieExists(true);
+    									break;
+    								}
+    							}
+    						}
     						productMatch[i] = new Refreshment(r);
     						productMatch[i].setQuantity(productQuantity);
     					}else if(pr instanceof SeasonPass) {

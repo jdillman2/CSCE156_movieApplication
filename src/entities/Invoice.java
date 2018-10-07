@@ -75,13 +75,13 @@ public class Invoice {
 		return subTotal;
 	}
 	
-	public double getInvoiceFees() {
-		if(customer.getType().equals("S")) {
+	/*public double getInvoiceFees() {
+		if(customer instanceof Student) {
 			return 6.75;
 		}else {
 			return 0.0;
 		}
-	}
+	}*/
 	
 	public double getInvoiceTax() {
 		double taxes = 0.0;
@@ -94,8 +94,8 @@ public class Invoice {
 	public double getInvoiceDiscount() {
 		double taxes = this.getInvoiceTax();
 		double subtotal = this.getInvoiceSubTotal();
-		if(customer.getType().equals("S")) {
-			return (subtotal * .06) + taxes;
+		if(customer instanceof Student) {
+			return (subtotal * .08) + taxes;
 		}else {
 			return 0;
 		}
@@ -110,7 +110,8 @@ public class Invoice {
 		String custName = this.customer.getName();
 		String salesName = this.salesPerson.getName();
 		double subTotal = this.getInvoiceSubTotal();
-		System.out.printf("%-8s %-36s %-20s %-2s %7.2f\n", id, custName, salesName, "$", subTotal);
+		double fees = this.customer.getCustomerFee();
+		System.out.printf("%-8s %-36s %-20s %-2s %7.2f %-2s %6.2f\n", id, custName, salesName, "$", subTotal, "$", fees);
 	}
 	
 }
