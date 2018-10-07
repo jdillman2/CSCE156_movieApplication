@@ -18,6 +18,15 @@ public class Customer {
 		this.name = name;
 		this.address = address;
 	}
+	
+	public Customer(Customer oldCustomer) {
+		this.customerCode = oldCustomer.customerCode;
+		this.type = oldCustomer.type;
+		this.primaryContactCode = oldCustomer.primaryContactCode;
+		this.primaryContact = new Person(oldCustomer.getPrimaryContact());
+		this.name = oldCustomer.name;
+		this.address = new Address(oldCustomer.getAddress());
+	}
 
 	
 	public String getPrimaryContactCode() {
@@ -70,5 +79,11 @@ public class Customer {
 		this.address = address;
 	}
 	
-	
+	public String getFullType() {
+		if(this.type.equals("S")) {
+			return "Student";
+		}else {
+			return "General";
+		}
+	}
 }

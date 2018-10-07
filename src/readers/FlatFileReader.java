@@ -82,7 +82,7 @@ public class FlatFileReader {
 	public ArrayList<Product> readProduct() {
 		Scanner s = null;
     	try {
-			s = new Scanner(new File("data/Product.dat"));
+			s = new Scanner(new File("data/Products.dat"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -130,7 +130,7 @@ public class FlatFileReader {
     		String customerCode = invoice[1];
     		String personCode = invoice[2];
     		String invoiceDate = invoice[3];
-    		String[] Product = invoice[4].split(",");
+    		String[] product = invoice[4].split(",");
     		
     		//Find associated Person using primaryContact
     		//Re-read personList using PersonsReader
@@ -140,7 +140,7 @@ public class FlatFileReader {
     		//Loop through personList to see if there is a matching code to the customer
     		Customer customerMatch = null;
     		Person personMatch = null;
-    		Product[] productMatch = new Product[Product.length];
+    		Product[] productMatch = new Product[product.length];
     		for(Customer c : customerList) {
     			if (customerCode.equals(c.getCustomerCode())) {
     				customerMatch = c;
@@ -152,15 +152,44 @@ public class FlatFileReader {
     			}
     		}
     		for(Product pr : productList) {
-    			for(int i = 0; i < Product.length; i++) {
-    				String[] productData = Product[i].split(":");
+    			for(int i = 0; i < product.length; i++) {
+    				String[] productData = product[i].split(":");
     				String productCode = productData[0];
-    				if(productCode.equals(pr.getProductCode())) {
-    					productMatch[i] = pr;
+    				int productQuantity = Integer.parseInt(productData[1]);
+    				String codeMatch = pr.getProductCode();
+    				if(productCode.equals(codeMatch)) {
+    					if(pr instanceof Movie) {
+    						Movie m = (Movie)pr;
+    						productMatch[i] = new Movie(m);
+    						productMatch[i].setQuantity(productQuantity);
+    					}else if(pr instanceof ParkingPass){
+    						String matchingMovie = null;
+    	    				if(productData.length == 3) {
+    	    					matchingMovie = productData[2];
+    	    				}
+    						ParkingPass p = (ParkingPass)pr;
+    						for(int j = 0; j < product.length; j++) {
+    							String[] findMovie = product[j].split(":");
+    							String code = findMovie[0];
+    							if(code.equals(matchingMovie)) {
+    								p.setNumOfTickets(Integer.parseInt(findMovie[1]));
+    							}
+    						}
+    						productMatch[i] = new ParkingPass(p);
+    						productMatch[i].setQuantity(productQuantity);
+    					}else if(pr instanceof Refreshment) {
+    						Refreshment r = (Refreshment)pr;
+    						productMatch[i] = new Refreshment(r);
+    						productMatch[i].setQuantity(productQuantity);
+    					}else if(pr instanceof SeasonPass) {
+    						SeasonPass sp = (SeasonPass)pr;
+    						sp.setInvoiceDate(invoiceDate);
+    						productMatch[i] = new SeasonPass(sp);
+    						productMatch[i].setQuantity(productQuantity);
+    					}
     				}
     			}
     		}
-    		
     		//Add customer to customerList
     		invoiceList.add(new Invoice(invoiceCode, customerMatch, personMatch, invoiceDate, productMatch));
     	}
