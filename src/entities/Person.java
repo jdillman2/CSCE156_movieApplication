@@ -15,6 +15,13 @@ public class Person {
 		this.personAddress = personAddress;
 		this.emails = emails;
 	}
+	public Person(Person oldPerson) {
+		this.personCode = oldPerson.personCode;
+		this.lName = oldPerson.lName;
+		this.fName = oldPerson.fName;
+		this.personAddress = new Address(oldPerson.getPersonAddress());
+		this.emails = oldPerson.emails;
+	}
 	public String getPersonCode() {
 		return personCode;
 	}
@@ -46,6 +53,8 @@ public class Person {
 		this.emails = emails;
 	}
 	
-	
+	public String getName() {
+		return this.lName + ", " + this.fName;
+	}
 	
 }

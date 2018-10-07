@@ -18,12 +18,24 @@ public class SeasonPass extends Ticket {
 		return dt;
 	}
 	
+	public double getDiscount() {
+		return 0;
+	}
+	
 	public SeasonPass(String productCode, String productType, double price, String name, String startDate,
 			String endDate) {
 		super(productCode, productType, price);
 		this.name = name;
 		this.startDate = convertDateString(startDate);
 		this.endDate = convertDateString(endDate);
+	}
+	
+	public SeasonPass(SeasonPass oldPass) {
+		super(oldPass.getProductCode(), oldPass.getProductType(), oldPass.getPrice());
+		this.name = oldPass.getName();
+		this.startDate = oldPass.getStartDate();
+		this.endDate = oldPass.getEndDate();
+		this.invoiceDate = oldPass.getInvoiceDate();
 	}
 
 	public String getName() {

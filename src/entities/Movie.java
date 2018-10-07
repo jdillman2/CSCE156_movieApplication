@@ -10,7 +10,7 @@ public class Movie extends Ticket {
 	private String title;
 	private Address theatreAddress;
 	private String theatreNo;
-	private double movieDiscount;
+	
 	private DateTime convertDateString(String movieTime) {
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
 		DateTime dt = formatter.parseDateTime(movieTime);
@@ -24,7 +24,14 @@ public class Movie extends Ticket {
 		this.title = title;
 		this.theatreAddress = theatreAddress;
 		this.theatreNo = theatreNo;
-		this.setMovieDiscount();
+	}
+	
+	public Movie(Movie oldMovie) {
+		super(oldMovie.getProductCode(), oldMovie.getProductType(), oldMovie.getPrice());
+		this.movieTime = new DateTime(oldMovie.getMovieTime());
+		this.title = oldMovie.getTitle();
+		this.theatreAddress = new Address(oldMovie.getTheatreAddress());
+		this.theatreNo = oldMovie.getTheatreNo();
 	}
 
 	public DateTime getMovieTime() {
@@ -59,19 +66,18 @@ public class Movie extends Ticket {
 		this.theatreNo = theatreNo;
 	}
 
-	public double getMovieDiscount() {
-		return movieDiscount;
-	}
-
-	public void setMovieDiscount() {
+	public double getDiscount() {
 		if(this.movieTime.getDayOfWeek() == 2 || this.movieTime.getDayOfWeek() == 4) {
-			this.movieDiscount = .07;
+			return .07;
+		}else {
+			return 0.0;
 		}
 	}
+
 	public double getSubtotal() {
 		int quantity = super.getQuantity();
 		double price = super.getPrice();
-		double discount = 1 - this.movieDiscount;
+		double discount = 1 - this.getDiscount();
 		return quantity * price * discount;
 	}
 	@Override 

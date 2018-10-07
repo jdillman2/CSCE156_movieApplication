@@ -67,5 +67,50 @@ public class Invoice {
 		this.products = products;
 	}
 	
+	public double getInvoiceSubTotal() {
+		double subTotal = 0.0;
+		for(Product p: products) {
+			subTotal += p.getSubtotal();
+		}
+		return subTotal;
+	}
+	
+	public double getInvoiceFees() {
+		if(customer.getType().equals("S")) {
+			return 6.75;
+		}else {
+			return 0.0;
+		}
+	}
+	
+	public double getInvoiceTax() {
+		double taxes = 0.0;
+		for(Product p: products) {
+			taxes += p.getTAX();
+		}
+		return taxes;
+	}
+	
+	public double getInvoiceDiscount() {
+		double taxes = this.getInvoiceTax();
+		double subtotal = this.getInvoiceSubTotal();
+		if(customer.getType().equals("S")) {
+			return (subtotal * .06) + taxes;
+		}else {
+			return 0;
+		}
+	}
+	
+	public double getInvoiceTotal() {
+		return this.getInvoiceSubTotal() + this.getInvoiceTax() - this.getInvoiceDiscount();
+	}
+	
+	public void printSummaryTotal() {
+		String id = this.invoiceID;
+		String custName = this.customer.getName();
+		String salesName = this.salesPerson.getName();
+		double subTotal = this.getInvoiceSubTotal();
+		System.out.printf("%-8s %-36s %-20s %-2s %7.2f\n", id, custName, salesName, "$", subTotal);
+	}
 	
 }

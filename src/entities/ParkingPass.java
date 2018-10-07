@@ -3,7 +3,11 @@ package entities;
 public class ParkingPass extends Service {
 	
 	private int numOfTickets;
-
+	
+	public double getDiscount() {
+		return 0.0;
+	}
+	
 	public int getNumOfTickets() {
 		return numOfTickets;
 	}
@@ -15,7 +19,11 @@ public class ParkingPass extends Service {
 	public ParkingPass(String productCode, String productType, double price) {
 		super(productCode, productType, price);
 	}
-
+	
+	public ParkingPass(ParkingPass oldPass) {
+		super(oldPass.getProductCode(), oldPass.getProductType(), oldPass.getPrice());
+		this.numOfTickets = oldPass.getNumOfTickets();
+	}
 	
 	public double getSubtotal() {
 		int quantity = super.getQuantity();

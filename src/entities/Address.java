@@ -15,6 +15,14 @@ public class Address {
 		this.zip = zip;
 		this.country = country;
 	}
+	
+	public Address(Address oldAddress) {
+		this.street = oldAddress.street;
+		this.city = oldAddress.city;
+		this.state = oldAddress.state;
+		this.zip = oldAddress.zip;
+		this.country = oldAddress.country;
+	}
 
 	public String getStreet() {
 		return street;

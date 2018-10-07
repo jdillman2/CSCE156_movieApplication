@@ -5,16 +5,7 @@ public abstract class Product {
 	private String productType;
 	private double price;
 	private int quantity;
-	private double discount;
-	
-	public double getDiscount() {
-		return discount;
-	}
-	public void setDiscount(Customer c) {
-		if(c.getType().equals("S")) {
-			this.discount = .08;
-		}
-	}
+
 	public Product(String productCode, String productType, double price) {
 		super();
 		this.productCode = productCode;
@@ -48,4 +39,5 @@ public abstract class Product {
 	
 	abstract double getTAX();
 	abstract double getSubtotal();
+	abstract double getDiscount();
 }

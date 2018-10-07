@@ -3,19 +3,32 @@ package entities;
 public class Refreshment extends Service{
 	
 	private String name;
-	private double discount;
+	private boolean movieExists;
 	
-	public double getDiscount() {
-		return discount;
+	public boolean isMovieExists() {
+		return movieExists;
 	}
 
-	public void setDiscount(double discount) {
-		this.discount = discount;
+	public void setMovieExists(boolean movieExists) {
+		this.movieExists = movieExists;
+	}
+
+	public double getDiscount() {
+		if(movieExists) {
+			return .05;
+		}else {
+			return 0.0;
+		}
 	}
 
 	public Refreshment(String productCode, String productType, double price, String name) {
 		super(productCode, productType, price);
 		this.name = name;
+	}
+	
+	public Refreshment(Refreshment oldRefreshment) {
+		super(oldRefreshment.getProductCode(), oldRefreshment.getProductType(), oldRefreshment.getPrice());
+		this.name = oldRefreshment.getName();
 	}
 
 	public String getName() {
@@ -36,7 +49,7 @@ public class Refreshment extends Service{
 	public double getSubtotal() {
 		int quantity = super.getQuantity();
 		double price = super.getPrice();
-		double discount = 1 - this.discount;
+		double discount = 1 - this.getDiscount();
 		return quantity * price * discount;
 	}
 	
