@@ -11,13 +11,17 @@ public class Student extends Customer {
 	}
 
 	@Override
-	double getCustomerFee() {
+	public double getCustomerFee() {
 		return this.FEES;
 	}
 
 	@Override
-	double getDiscountRate() {
+	public double getDiscountRate() {
 		return this.DISCOUNT_RATE;
 	}
 
+	@Override
+	public String getFullType() {
+		return "Student";
+	}
 }

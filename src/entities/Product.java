@@ -37,7 +37,8 @@ public abstract class Product {
 		this.quantity = quantity;
 	}
 	
-	abstract double getTAX();
-	abstract double getSubtotal();
-	abstract double getDiscount();
+	public abstract double getTAX();
+	public abstract double getSubtotal();
+	public abstract double getDiscount();
+	public abstract String getFullType();
 }

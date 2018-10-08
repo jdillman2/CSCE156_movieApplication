@@ -19,7 +19,7 @@ public class SeasonPass extends Ticket {
 	}
 	
 	public double getDiscount() {
-		return 0;
+		return 0.0;
 	}
 	
 	public SeasonPass(String productCode, String productType, double price, String name, String startDate,
@@ -87,6 +87,17 @@ public class SeasonPass extends Ticket {
 		double pricePerDay = this.getPricePerDay();
 		return (pricePerDay * daysLeftInSeason + 8) * quantity;
 	}
+	
+	public int getProratedDays() {
+		int quantity = super.getQuantity();
+		int daysLeftInSeason;
+		if(this.invoiceDate.isAfter(this.startDate)) {
+			daysLeftInSeason = Days.daysBetween(invoiceDate, endDate).getDays();
+		}else {
+			daysLeftInSeason = Days.daysBetween(startDate, endDate).getDays();
+		}
+		return daysLeftInSeason;
+	}
 	@Override
 	public double getTAX() {
 		double subtotal = this.getSubtotal();
@@ -94,6 +105,11 @@ public class SeasonPass extends Ticket {
 		return subtotal * tax;
 	}
 	
+	//ADDED
+	@Override
+	public String getFullType() {
+		return "SeasonPass";
+	}
 	
 	
 }

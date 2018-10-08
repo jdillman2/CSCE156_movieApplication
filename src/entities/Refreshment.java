@@ -54,4 +54,8 @@ public class Refreshment extends Service{
 		return quantity * price * discount;
 	}
 	
+	@Override
+	public String getFullType() {
+		return "Refreshment";
+	}
 }

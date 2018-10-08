@@ -86,4 +86,9 @@ public class Movie extends Ticket {
 		double tax = super.getTAX();
 		return subtotal * tax;
 	}
+
+	@Override
+	public String getFullType() {
+		return "MovieTicket";
+	}
 }

@@ -70,7 +70,7 @@ public abstract class Customer {
 		this.address = address;
 	}
 	
-	abstract double getCustomerFee();
-	abstract double getDiscountRate();
-	
+	public abstract double getCustomerFee();
+	public abstract double getDiscountRate();
+	public abstract String getFullType();
 }

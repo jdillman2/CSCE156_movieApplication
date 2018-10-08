@@ -75,14 +75,6 @@ public class Invoice {
 		return subTotal;
 	}
 	
-	/*public double getInvoiceFees() {
-		if(customer instanceof Student) {
-			return 6.75;
-		}else {
-			return 0.0;
-		}
-	}*/
-	
 	public double getInvoiceTax() {
 		double taxes = 0.0;
 		for(Product p: products) {
@@ -94,15 +86,26 @@ public class Invoice {
 	public double getInvoiceDiscount() {
 		double taxes = this.getInvoiceTax();
 		double subtotal = this.getInvoiceSubTotal();
-		if(customer instanceof Student) {
+		if(customer.getType().equals("S")) {
 			return (subtotal * .08) + taxes;
 		}else {
 			return 0;
 		}
 	}
 	
-	public double getInvoiceTotal() {
-		return this.getInvoiceSubTotal() + this.getInvoiceTax() - this.getInvoiceDiscount();
+	public double getInvoiceAdditionalFee() {
+		return customer.getCustomerFee();
+	}
+	
+	public double getInvoiceTotalofTotals() {
+		double total = 0.0;
+		for(Product p: products) {
+			total += p.getSubtotal() + p.getTAX();
+		}
+		return total;
+	}
+	public double getInvoiceGrandTotal() {
+		return this.getInvoiceSubTotal() + this.getInvoiceTax() - this.getInvoiceDiscount() + this.getInvoiceAdditionalFee();
 	}
 	
 	public void printSummaryTotal() {
@@ -110,8 +113,7 @@ public class Invoice {
 		String custName = this.customer.getName();
 		String salesName = this.salesPerson.getName();
 		double subTotal = this.getInvoiceSubTotal();
-		double fees = this.customer.getCustomerFee();
-		System.out.printf("%-8s %-36s %-20s %-2s %7.2f %-2s %6.2f\n", id, custName, salesName, "$", subTotal, "$", fees);
+		System.out.printf("%-8s %-36s %-20s %-2s %7.2f\n", id, custName, salesName, "$", subTotal);
 	}
 	
 }

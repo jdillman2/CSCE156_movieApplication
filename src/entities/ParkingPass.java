@@ -53,4 +53,9 @@ public class ParkingPass extends Service {
 		double tax = super.getTAX();
 		return subtotal * tax;
 	}
+
+	@Override
+	public String getFullType() {
+		return "ParkingPass";
+	}
 }
