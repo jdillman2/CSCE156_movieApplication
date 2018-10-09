@@ -63,7 +63,9 @@ public class InvoiceReport {
     	double iTaxes = 0.0;
     	double iDiscounts = 0.0;
     	double iTotals = 0.0;
-    	System.out.print("=========================\nEXECUTIVE SUMMARY REPORT\n=========================\n");
+    	System.out.print("=========================\nEXECUTIVE SUMMARY REPORT\n");
+    	System.out.printf("%-66s %10s "
+    			+ "%10s %10s %10s %10s\n", "=========================", "Subtotal", "Fees", "Taxes", "Discounts","Total");
     	for(Invoice i: invoices) {
         	i.printSummaryTotal();
         	iSubtotals += i.getInvoiceSubTotal();
