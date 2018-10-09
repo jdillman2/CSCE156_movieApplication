@@ -25,7 +25,7 @@ public class Movie extends Ticket {
 		this.theatreAddress = theatreAddress;
 		this.theatreNo = theatreNo;
 	}
-	
+	//Copy constructor that can be used to duplicate a movie product when copying from the product list to an invoice
 	public Movie(Movie oldMovie) {
 		super(oldMovie.getProductCode(), oldMovie.getProductType(), oldMovie.getPrice());
 		this.movieTime = new DateTime(oldMovie.getMovieTime());
@@ -65,7 +65,11 @@ public class Movie extends Ticket {
 	public void setTheatreNo(String theatreNo) {
 		this.theatreNo = theatreNo;
 	}
-
+	
+	//Overridden methods inherited from the Product Abstract Class
+	
+	//Discount method returns a discount based on day of week, this discount is only applied to movies.
+	@Override
 	public double getDiscount() {
 		if(this.movieTime.getDayOfWeek() == 2 || this.movieTime.getDayOfWeek() == 4) {
 			return .07;
@@ -73,7 +77,7 @@ public class Movie extends Ticket {
 			return 0.0;
 		}
 	}
-
+	@Override
 	public double getSubtotal() {
 		int quantity = super.getQuantity();
 		double price = super.getPrice();

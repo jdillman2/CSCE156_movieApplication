@@ -36,7 +36,7 @@ public abstract class Product {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
+	//Abstract classes that will get called from each individual product type
 	public abstract double getTAX();
 	public abstract double getSubtotal();
 	public abstract double getDiscount();

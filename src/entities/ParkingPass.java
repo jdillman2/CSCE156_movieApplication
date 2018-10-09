@@ -5,10 +5,6 @@ public class ParkingPass extends Service {
 	private int numOfTickets;
 	private String matchingMovie = "";
 	
-	public double getDiscount() {
-		return 0.0;
-	}
-	
 	public int getNumOfTickets() {
 		return numOfTickets;
 	}
@@ -28,13 +24,23 @@ public class ParkingPass extends Service {
 	public ParkingPass(String productCode, String productType, double price) {
 		super(productCode, productType, price);
 	}
-	
+	//Copy constructor that can be used to duplicate a parking pass product when copying to an invoice object
+	//and preserve the numOftickets and matchingMovie when reading the invoice file.
 	public ParkingPass(ParkingPass oldPass) {
 		super(oldPass.getProductCode(), oldPass.getProductType(), oldPass.getPrice());
 		this.numOfTickets = oldPass.getNumOfTickets();
 		this.matchingMovie = oldPass.getMatchingMovie();
 	}
 	
+	//Overridden methods inherited from the Product Abstract Class
+	
+	//No actual discounts are offered for this product so it returns 0
+	@Override
+	public double getDiscount() {
+		return 0.0;
+	}
+	//getSubtotal() uses the numOfTickets attribute to determine how many free passes there should be for the invoice.
+	@Override
 	public double getSubtotal() {
 		int quantity = super.getQuantity();
 		int freePasses = this.numOfTickets;

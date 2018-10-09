@@ -1,7 +1,7 @@
 package entities;
 
 public class General extends Customer {
-
+	
 	private final double FEES = 0.0;
 	private final double DISCOUNT_RATE = 0.0;
 	

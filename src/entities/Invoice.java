@@ -66,7 +66,7 @@ public class Invoice {
 	public void setProducts(Product[] products) {
 		this.products = products;
 	}
-	
+	//The following GetInvoiceXXXX() methods utilize the individual product methods to get totals, taxes, fees and discounts
 	public double getInvoiceSubTotal() {
 		double subTotal = 0.0;
 		for(Product p: products) {
@@ -96,7 +96,7 @@ public class Invoice {
 	public double getInvoiceAdditionalFee() {
 		return customer.getCustomerFee();
 	}
-	
+	//This returns the total of each unique product in the invoice to be used in the detail report
 	public double getInvoiceTotalofTotals() {
 		double total = 0.0;
 		for(Product p: products) {
@@ -104,10 +104,11 @@ public class Invoice {
 		}
 		return total;
 	}
+	//This provides the final grand total for all the products in the invoice
 	public double getInvoiceGrandTotal() {
 		return this.getInvoiceSubTotal() + this.getInvoiceTax() - this.getInvoiceDiscount() + this.getInvoiceAdditionalFee();
 	}
-	
+	//This provides a single formatted line for the necessary data fields in the Summary Report
 	public void printSummaryTotal() {
 		String id = this.invoiceID;
 		String custName = this.customer.getName() + "[" + this.customer.getFullType() + "]";

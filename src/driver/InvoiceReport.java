@@ -56,7 +56,9 @@ public class InvoiceReport {
         }
     
     }
-    
+    //This method calls the printSummarytotal() method for each invoice in the ArrayList
+    //It also collects each respective invoices totals together in local variables 
+    //to be printed at the end of the report.
     private static void generateSummaryReport(ArrayList<Invoice> invoices) {
     	double iSubtotals = 0.0;
     	double iFees = 0.0;

@@ -18,10 +18,6 @@ public class SeasonPass extends Ticket {
 		return dt;
 	}
 	
-	public double getDiscount() {
-		return 0.0;
-	}
-	
 	public SeasonPass(String productCode, String productType, double price, String name, String startDate,
 			String endDate) {
 		super(productCode, productType, price);
@@ -29,7 +25,8 @@ public class SeasonPass extends Ticket {
 		this.startDate = convertDateString(startDate);
 		this.endDate = convertDateString(endDate);
 	}
-	
+	//Copy constructor that can be used to duplicate a season pass product 
+	//when it is set when building the Invoice objects
 	public SeasonPass(SeasonPass oldPass) {
 		super(oldPass.getProductCode(), oldPass.getProductType(), oldPass.getPrice());
 		this.name = oldPass.getName();
@@ -69,13 +66,26 @@ public class SeasonPass extends Ticket {
 	public void setInvoiceDate(String invoiceDate) {
 		this.invoiceDate = this.convertDateString(invoiceDate);
 	}
-	
+	//getPricePerDay() and getProratedDays() allows the SeasonPass to calculate the price if 
+	//the season pass is purchased after the start of the passes start date.
 	private double getPricePerDay() {
 		int daysInSeason = Days.daysBetween(startDate, endDate).getDays();
 		double price = super.getPrice();
 		return price/daysInSeason;
 	}
 	
+	public int getProratedDays() {
+		int daysLeftInSeason;
+		if(this.invoiceDate.isAfter(this.startDate)) {
+			daysLeftInSeason = Days.daysBetween(invoiceDate, endDate).getDays();
+		}else {
+			daysLeftInSeason = Days.daysBetween(startDate, endDate).getDays();
+		}
+		return daysLeftInSeason;
+	}
+	
+	//Overridden methods inherited from the Product Abstract Class
+	@Override
 	public double getSubtotal() {
 		int quantity = super.getQuantity();
 		int daysLeftInSeason;
@@ -88,16 +98,12 @@ public class SeasonPass extends Ticket {
 		return (pricePerDay * daysLeftInSeason + 8) * quantity;
 	}
 	
-	public int getProratedDays() {
-		//int quantity = super.getQuantity();
-		int daysLeftInSeason;
-		if(this.invoiceDate.isAfter(this.startDate)) {
-			daysLeftInSeason = Days.daysBetween(invoiceDate, endDate).getDays();
-		}else {
-			daysLeftInSeason = Days.daysBetween(startDate, endDate).getDays();
-		}
-		return daysLeftInSeason;
+	//No discount is ever offered by method must be implemented for the inherited superclass
+	@Override
+	public double getDiscount() {
+		return 0.0;
 	}
+	
 	@Override
 	public double getTAX() {
 		double subtotal = this.getSubtotal();
