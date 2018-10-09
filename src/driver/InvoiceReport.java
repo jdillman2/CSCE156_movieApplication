@@ -26,7 +26,7 @@ public class InvoiceReport {
         ArrayList<Invoice> invoices = ffr.readInvoices();
         
         //Generate summary report
-        //generateSummaryReport();
+        generateSummaryReport(invoices);
         
         //Print invoices header
         System.out.println("Invididual Invoice Detail Reports\n"
@@ -57,8 +57,26 @@ public class InvoiceReport {
     
     }
     
-    public static void generateSummaryReport() {
-        
+    private static void generateSummaryReport(ArrayList<Invoice> invoices) {
+    	double iSubtotals = 0.0;
+    	double iFees = 0.0;
+    	double iTaxes = 0.0;
+    	double iDiscounts = 0.0;
+    	double iTotals = 0.0;
+    	System.out.print("=========================\nEXECUTIVE SUMMARY REPORT\n=========================\n");
+    	for(Invoice i: invoices) {
+        	i.printSummaryTotal();
+        	iSubtotals += i.getInvoiceSubTotal();
+        	iFees += i.getCustomer().getCustomerFee();
+        	iTaxes += i.getInvoiceTax();
+        	iDiscounts += i.getInvoiceDiscount() * -1;
+        	iTotals += i.getInvoiceGrandTotal();
+        }
+    	System.out.println("======================================================================================"
+    			+ "===================================");
+    	System.out.printf("%-66s %2s %7.2f %2s %7.2f "
+    			+ "%2s %7.2f %2s %7.2f %2s %7.2f"
+    			+ "\n\n\n\n\n\n", "TOTALS", "$", iSubtotals, "$", iFees, "$", iTaxes, "$", iDiscounts, "$", iTotals);
     }
     
     public static void generateDetailReport(Invoice invoice) {

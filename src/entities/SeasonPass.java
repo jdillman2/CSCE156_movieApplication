@@ -89,7 +89,7 @@ public class SeasonPass extends Ticket {
 	}
 	
 	public int getProratedDays() {
-		int quantity = super.getQuantity();
+		//int quantity = super.getQuantity();
 		int daysLeftInSeason;
 		if(this.invoiceDate.isAfter(this.startDate)) {
 			daysLeftInSeason = Days.daysBetween(invoiceDate, endDate).getDays();

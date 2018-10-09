@@ -110,10 +110,17 @@ public class Invoice {
 	
 	public void printSummaryTotal() {
 		String id = this.invoiceID;
-		String custName = this.customer.getName();
+		String custName = this.customer.getName() + "[" + this.customer.getFullType() + "]";
 		String salesName = this.salesPerson.getName();
 		double subTotal = this.getInvoiceSubTotal();
-		System.out.printf("%-8s %-36s %-20s %-2s %7.2f\n", id, custName, salesName, "$", subTotal);
+		double fees = this.customer.getCustomerFee();
+		double taxes = this.getInvoiceTax();
+		double discount = this.getInvoiceDiscount() * -1;
+		double total = this.getInvoiceGrandTotal();
+		System.out.printf("%-8s %-36s %-20s %2s "
+				+ "%7.2f %2s %7.2f %2s %7.2f "
+				+ "%2s %7.2f %2s %7.2f"
+				+ "\n", id, custName, salesName, "$", subTotal, "$", fees, "$", taxes, "$", discount, "$", total);
 	}
 	
 }
