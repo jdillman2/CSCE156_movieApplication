@@ -73,7 +73,8 @@ public class SeasonPass extends Ticket {
 		double price = super.getPrice();
 		return price/daysInSeason;
 	}
-	
+	//This method is used in invoice detailed reports to indicate to the customer how many days 
+	//their prorated discount took into account
 	public int getProratedDays() {
 		int daysLeftInSeason;
 		if(this.invoiceDate.isAfter(this.startDate)) {
@@ -111,7 +112,6 @@ public class SeasonPass extends Ticket {
 		return subtotal * tax;
 	}
 	
-	//ADDED
 	@Override
 	public String getFullType() {
 		return "SeasonPass";

@@ -96,7 +96,8 @@ public class Invoice {
 	public double getInvoiceAdditionalFee() {
 		return customer.getCustomerFee();
 	}
-	//This returns the total of each unique product in the invoice to be used in the detail report
+	
+	//This returns the summation of each unique product's total cost in the invoice, which is used in the detail report
 	public double getInvoiceTotalofTotals() {
 		double total = 0.0;
 		for(Product p: products) {

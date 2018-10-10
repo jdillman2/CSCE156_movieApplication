@@ -56,6 +56,7 @@ public class InvoiceReport {
         }
     
     }
+    
     //This method calls the printSummarytotal() method for each invoice in the ArrayList
     //It also collects each respective invoices totals together in local variables 
     //to be printed at the end of the report.
@@ -66,8 +67,9 @@ public class InvoiceReport {
     	double iDiscounts = 0.0;
     	double iTotals = 0.0;
     	System.out.print("=========================\nEXECUTIVE SUMMARY REPORT\n");
-    	System.out.printf("%-66s %10s "
-    			+ "%10s %10s %10s %10s\n", "=========================", "Subtotal", "Fees", "Taxes", "Discounts","Total");
+    	System.out.printf("%-66s\n", "=========================");
+    	System.out.printf("%-8s %-36s %-21s %9s %10s %10s %10s %10s\n" , "Invoice", "Customer", "Salesperson", 
+    			"Subtotal", "Fees", "Taxes", "Discount","Total");
     	for(Invoice i: invoices) {
         	i.printSummaryTotal();
         	iSubtotals += i.getInvoiceSubTotal();
@@ -103,8 +105,8 @@ public class InvoiceReport {
         //Product receipt header
         System.out.print("\nCode\t");
         System.out.printf("%-60s %10s %10s %10s\n", "Item", "SubTotal", "Tax", "Total");
-        //Product receipt
         
+        //Product receipt for each product
         for(Product product : invoice.getProducts()) {
             printProductDetails(product);
           
@@ -113,7 +115,7 @@ public class InvoiceReport {
         
     private static void printProductDetails(Product p)
     {
-
+    	//Depending on product type, print details
         if(p instanceof Movie) {
         //Print movie details
             System.out.printf("%s\t", p.getProductCode());

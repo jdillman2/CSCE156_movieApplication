@@ -10,6 +10,7 @@ public class General extends Customer {
 		super(customerCode, type, primaryContactCode, primaryContact, name, address);
 	}
 
+	//Overridden methods from parent class Customer
 	@Override
 	public double getCustomerFee() {
 		return this.FEES;
