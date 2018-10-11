@@ -21,7 +21,7 @@ public class FlatFileReader {
 	public ArrayList<Person> readPersons(){
 		Scanner s = null;
     	try {
-			s = new Scanner(new File("data/Persons.dat"));
+			s = new Scanner(new File("data/Persons_3.dat"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -46,7 +46,7 @@ public class FlatFileReader {
 	public ArrayList<Customer> readCustomers(){
 		Scanner s = null;
     	try {
-			s = new Scanner(new File("data/Customers.dat"));
+			s = new Scanner(new File("data/Customers_3.dat"));
 		} 
     	catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -91,7 +91,7 @@ public class FlatFileReader {
 	public ArrayList<Product> readProduct() {
 		Scanner s = null;
     	try {
-			s = new Scanner(new File("data/Products.dat"));
+			s = new Scanner(new File("data/Products_3.dat"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -125,7 +125,7 @@ public class FlatFileReader {
 	public ArrayList<Invoice> readInvoices(){
 		Scanner s = null;
     	try {
-			s = new Scanner(new File("data/Invoices.dat"));
+			s = new Scanner(new File("data/Invoices_3.dat"));
 		} 
     	catch (FileNotFoundException e) {
 			e.printStackTrace();
