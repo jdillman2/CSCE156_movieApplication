@@ -66,6 +66,36 @@
       "zip": "69000",
       "country": "USA"
     }
+  },
+  {
+    "personCode": "HL2E1",
+    "lName": "Vance",
+    "fName": "Alex",
+    "personAddress": {
+      "street": "2900 Combine Rd",
+      "city": "Birmingham",
+      "state": "AL",
+      "zip": "48394",
+      "country": "USA"
+    },
+    "emails": [
+      "avance@blackmesa.org"
+    ]
+  },
+  {
+    "personCode": "GB345",
+    "lName": "Bond",
+    "fName": "James",
+    "personAddress": {
+      "street": "4500 Skyfall Ln",
+      "city": "Glencoe",
+      "state": "SCT",
+      "zip": "PA35",
+      "country": "United Kingdom"
+    },
+    "emails": [
+      "jb007@mi6.gov"
+    ]
   }
 ]
 }

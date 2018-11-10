@@ -130,7 +130,7 @@ public class InvoiceReport {
             
         //Format movie DateTime
             DateTime dt = ((Movie) p).getMovieTime();
-            DateTimeFormatter dtf = DateTimeFormat.forPattern("MMM d,YYYY HH:m");
+            DateTimeFormatter dtf = DateTimeFormat.forPattern("MMM d,YYYY HH:mm");
             String formattedDateTime = dtf.print(dt);
         //Check if Tue/Thurs discount
             String movieDetails_2 = String.format("    \t%s (%d units @ %.2f/unit)", formattedDateTime, p.getQuantity(), p.getPrice());

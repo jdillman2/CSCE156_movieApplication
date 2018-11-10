@@ -1,9 +1,26 @@
 {"customers":
 [
   {
+    "FEES": 0.0,
+    "DISCOUNT_RATE": 0.0,
     "customerCode": "C007",
     "type": "G",
-    "primaryContactCode": "486",
+    "primaryContactCode": "GB345",
+    "primaryContact": {
+      "personCode": "GB345",
+      "lName": "Bond",
+      "fName": "James",
+      "personAddress": {
+        "street": "4500 Skyfall Ln",
+        "city": "Glencoe",
+        "state": "SCT",
+        "zip": "PA35",
+        "country": "United Kingdom"
+      },
+      "emails": [
+        "jb007@mi6.gov"
+      ]
+    },
     "name": "Nelnet",
     "address": {
       "street": "584 Berry Ridge Ave",
@@ -14,9 +31,26 @@
     }
   },
   {
+    "FEES": 0.0,
+    "DISCOUNT_RATE": 0.0,
     "customerCode": "C008",
     "type": "G",
-    "primaryContactCode": "222e",
+    "primaryContactCode": "HL2E1",
+    "primaryContact": {
+      "personCode": "HL2E1",
+      "lName": "Vance",
+      "fName": "Alex",
+      "personAddress": {
+        "street": "2900 Combine Rd",
+        "city": "Birmingham",
+        "state": "AL",
+        "zip": "48394",
+        "country": "USA"
+      },
+      "emails": [
+        "avance@blackmesa.org"
+      ]
+    },
     "name": "NRC Health",
     "address": {
       "street": "4887 Georgia St",
@@ -27,9 +61,23 @@
     }
   },
   {
+    "FEES": 0.0,
+    "DISCOUNT_RATE": 0.0,
     "customerCode": "C009",
     "type": "G",
-    "primaryContactCode": "800p",
+    "primaryContactCode": "6888",
+    "primaryContact": {
+      "personCode": "6888",
+      "lName": "Freeman",
+      "fName": "Gordon",
+      "personAddress": {
+        "street": "44 Pencil Lane",
+        "city": "Portland",
+        "state": "OR",
+        "zip": "69000",
+        "country": "USA"
+      }
+    },
     "name": "Ameritas",
     "address": {
       "street": "4865 Happy Place",
@@ -40,9 +88,23 @@
     }
   },
   {
+    "FEES": 0.0,
+    "DISCOUNT_RATE": 0.0,
     "customerCode": "C0010",
     "type": "G",
-    "primaryContactCode": "300h",
+    "primaryContactCode": "8420",
+    "primaryContact": {
+      "personCode": "8420",
+      "lName": "Jones",
+      "fName": "Casey",
+      "personAddress": {
+        "street": "5552 Turtle Lane",
+        "city": "New York",
+        "state": "NY",
+        "zip": "30330",
+        "country": "USA"
+      }
+    },
     "name": "Midwest Holdings",
     "address": {
       "street": "399 Dudley St",
@@ -53,6 +115,8 @@
     }
   },
   {
+    "FEES": 6.75,
+    "DISCOUNT_RATE": 0.08,
     "customerCode": "C0011",
     "type": "S",
     "primaryContactCode": "488b",

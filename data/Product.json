@@ -1,0 +1,85 @@
+{"Product":[
+{
+  "name": "Sunday Passport",
+  "startDate": "09-01-2018",
+  "endDate": "12-31-2018",
+  "TAX": 0.06,
+  "productCode": "f34ld",
+  "productType": "S",
+  "price": 50.0,
+  "quantity": 0
+},{
+  "name": "Movie Rewards",
+  "startDate": "01-01-2018",
+  "endDate": "12-31-2018",
+  "TAX": 0.06,
+  "productCode": "dd5",
+  "productType": "S",
+  "price": 150.0,
+  "quantity": 0
+},{
+  "name": "Pepperoni Pizza",
+  "movieExists": false,
+  "TAX": 0.04,
+  "productCode": "RFl321",
+  "productType": "R",
+  "price": 10.0,
+  "quantity": 0
+},{
+  "name": "Large Soda",
+  "movieExists": false,
+  "TAX": 0.04,
+  "productCode": "FlF34",
+  "productType": "R",
+  "price": 5.0,
+  "quantity": 0
+},{
+  "numOfTickets": 0,
+  "matchingMovie": "",
+  "TAX": 0.04,
+  "productCode": "445",
+  "productType": "P",
+  "price": 30.0,
+  "quantity": 0
+},{
+  "numOfTickets": 0,
+  "matchingMovie": "",
+  "TAX": 0.04,
+  "productCode": "flr",
+  "productType": "P",
+  "price": 25.0,
+  "quantity": 0
+},{
+  "movieTime": "01-08-2018 12:05",
+  "title": "Casa Blanca",
+  "theatreAddress": {
+    "street": "1011 P St",
+    "city": " Lincoln",
+    "state": " NE",
+    "zip": " 68508",
+    "country": " USA"
+  },
+  "theatreNo": "1",
+  "TAX": 0.06,
+  "productCode": "mrr4",
+  "productType": "M",
+  "price": 15.0,
+  "quantity": 0
+},{
+  "movieTime": "08-08-2018 12:55",
+  "title": "Citizen Kane",
+  "theatreAddress": {
+    "street": " 220 N 66th St",
+    "city": " Lincoln",
+    "state": " NE",
+    "zip": " 68505",
+    "country": " USA"
+  },
+  "theatreNo": "5",
+  "TAX": 0.06,
+  "productCode": "mpp3",
+  "productType": "M",
+  "price": 12.5,
+  "quantity": 0
+}
+]}
