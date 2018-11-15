@@ -16,6 +16,7 @@ import entities.Product;
 import entities.Refreshment;
 import entities.SeasonPass;
 import entities.Student;
+import lists.LinkedList;
 
 public class FlatFileReader {
 	public ArrayList<Person> readPersons(){
@@ -212,6 +213,101 @@ public class FlatFileReader {
     		}
     		//Add customer to customerList
     		invoiceList.add(new Invoice(invoiceCode, customerMatch, personMatch, invoiceDate, productMatch));
+    	}
+	s.close();
+	return invoiceList;
+	}
+	
+	public LinkedList<Invoice> readInvoicesToList(){
+		Scanner s = null;
+    	try {
+			s = new Scanner(new File("data/Invoices_3.dat"));
+		} 
+    	catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+    	
+    	LinkedList<Invoice> invoiceList = new LinkedList<Invoice>();
+    	s.nextLine();
+    	while(s.hasNext()) {
+    		String[] invoice = s.nextLine().split(";");
+    		String invoiceCode = invoice[0];
+    		String customerCode = invoice[1];
+    		String personCode = invoice[2];
+    		String invoiceDate = invoice[3];
+    		String[] product = invoice[4].split(",");
+    		
+    		//Find associated Person using primaryContact
+    		//Re-read personList using PersonsReader
+    		ArrayList<Customer> customerList = this.readCustomers();
+    		ArrayList<Person> personList = this.readPersons();
+    		ArrayList<Product> productList = this.readProduct();
+    		//Loop through personList to see if there is a matching code to the customer
+    		Customer customerMatch = null;
+    		Person personMatch = null;
+    		Product[] productMatch = new Product[product.length];
+    		for(Customer c : customerList) {
+    			if (customerCode.equals(c.getCustomerCode())) {
+    				customerMatch = c;
+    			}
+    		}
+    		for(Person p : personList) {
+    			if (personCode.equals(p.getPersonCode())) {
+    				personMatch = p;
+    			}
+    		}
+    		for(Product pr : productList) {
+    			for(int i = 0; i < product.length; i++) {
+    				String[] productData = product[i].split(":");
+    				String productCode = productData[0];
+    				int productQuantity = Integer.parseInt(productData[1]);
+    				String codeMatch = pr.getProductCode();
+    				if(productCode.equals(codeMatch)) {
+    					if(pr instanceof Movie) {
+    						Movie m = (Movie)pr;
+    						productMatch[i] = new Movie(m);
+    						productMatch[i].setQuantity(productQuantity);
+    					}else if(pr instanceof ParkingPass){
+    						String matchingMovie = null;
+    	    				if(productData.length == 3) {
+    	    					matchingMovie = productData[2];
+    	    				}
+    						ParkingPass p = (ParkingPass)pr;
+    						for(int j = 0; j < product.length; j++) {
+    							String[] findMovie = product[j].split(":");
+    							String code = findMovie[0];
+    							if(code.equals(matchingMovie)) {
+    								p.setNumOfTickets(Integer.parseInt(findMovie[1]));
+    								p.setMatchingMovie(matchingMovie);
+    							}
+    						}
+    						productMatch[i] = new ParkingPass(p);
+    						productMatch[i].setQuantity(productQuantity);
+    					}else if(pr instanceof Refreshment) {
+    						Refreshment r = (Refreshment)pr;
+    						for(Product m: productList) {
+    							for(int k = 0; k < product.length; k++) {
+    								String[] findMovie = product[k].split(":");
+    			    				String code = findMovie[0];
+    								if(m.getProductCode().equals(code) && m instanceof Movie) {
+    									r.setMovieExists(true);
+    									break;
+    								}
+    							}
+    						}
+    						productMatch[i] = new Refreshment(r);
+    						productMatch[i].setQuantity(productQuantity);
+    					}else if(pr instanceof SeasonPass) {
+    						SeasonPass sp = (SeasonPass)pr;
+    						sp.setInvoiceDate(invoiceDate);
+    						productMatch[i] = new SeasonPass(sp);
+    						productMatch[i].setQuantity(productQuantity);
+    					}
+    				}
+    			}
+    		}
+    		//Add invoice to invoiceList
+    		invoiceList.addInvoiceOrdered((new Invoice(invoiceCode, customerMatch, personMatch, invoiceDate, productMatch)));
     	}
 	s.close();
 	return invoiceList;
