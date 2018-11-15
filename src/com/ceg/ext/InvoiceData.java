@@ -593,12 +593,110 @@ double cost) {
 /**
  * 10. Removes all invoice records from the database
  */
-public static void removeAllInvoices() {}
+public static void removeAllInvoices() {
+	String deleteInvoiceProducts = "DELETE FROM Invoice_Products;";
+    String deleteInvoice = "DELETE FROM Invoice;";
+    
+    try {
+        conn = DatabaseInfo.getConnection();
+        ps = conn.prepareStatement(deleteInvoiceProducts);
+        ps.executeUpdate();
+        ps = conn.prepareStatement(deleteInvoice);
+        ps.executeUpdate();
+        ps.close();
+    }
+    catch (SQLException e) {
+        System.out.print("Problem deleting invoices from database.");
+        e.printStackTrace();
+    } 
+    //Close resources.
+    finally {
+          try {
+            ps.close();
+            conn.close();
+          } 
+          catch (SQLException e) {
+            e.printStackTrace();
+          }
+          }
+}
 /**
  * 11. Adds an invoice record to the database with the given data.
  */
 public static void addInvoice(String invoiceCode, String 
-customerCode, String salesPersonCode, String invoiceDate) {}
+customerCode, String salesPersonCode, String invoiceDate) {
+	
+	int cID = 0;
+	int pID = 0;
+	ResultSet rs = null;
+	
+	String getPersonID = "SELECT id FROM Persons WHERE personCode = ?";
+    String getCustomerID = "SELECT id FROM Customers WHERE customerCode = ?";
+    String testForInvoiceCopy = "SELECT * FROM Customers WHERE InvoiceCode = ?";
+    String addInvoice = "INSERT INTO Invoice(InvoiceCode, CustomerID, SalesPersonID, InvoiceDate) VALUES (?, ?, ?, ?);";
+    
+    try {
+        conn = DatabaseInfo.getConnection();
+        ps = conn.prepareStatement(getPersonID);
+        ps.setString(1, salesPersonCode);
+        ps.close();
+        rs = ps.executeQuery();
+        if(rs.next()) {
+            pID = rs.getInt("id");
+        }
+        rs = null;
+        ps = conn.prepareStatement(getCustomerID);
+        ps.setString(1, customerCode);
+        rs = ps.executeQuery();
+        if(rs.next()) {
+            cID = rs.getInt("id");
+        }
+    }
+    catch (SQLException e) {
+        System.out.print("Problem getting ids.");
+        e.printStackTrace();
+    }
+    rs = null;
+    boolean copy = false;
+    
+    try {
+        conn = DatabaseInfo.getConnection();
+        ps = conn.prepareStatement(testForInvoiceCopy);
+        ps.setString(1, invoiceCode);
+        rs = ps.executeQuery();
+        
+        if(rs.next()) {
+            copy = true;
+        }
+    } catch (SQLException e) {
+        System.out.print("Problem checking for refreshment copy.");
+        e.printStackTrace();
+    }
+    
+    if(copy == false) {
+        
+        try {
+            ps = conn.prepareStatement(addInvoice);
+            ps.setString(1, invoiceCode);
+            ps.setInt(2, cID);
+            ps.setInt(3, pID);
+            ps.setString(4, invoiceDate);
+            ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.print("Problem adding invoice.");
+            e.printStackTrace();
+        }  
+    //Close resources.
+        try {
+        		conn.close();
+        		ps.close();
+        }
+        catch (SQLException f) {
+            	f.printStackTrace();
+        }
+    }
+}
 /**
  * 12. Adds a particular movieticket (corresponding to 
 <code>productCode</code>
