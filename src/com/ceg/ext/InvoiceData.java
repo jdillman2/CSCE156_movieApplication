@@ -669,7 +669,7 @@ customerCode, String salesPersonCode, String invoiceDate) {
             copy = true;
         }
     } catch (SQLException e) {
-        System.out.print("Problem checking for refreshment copy.");
+        System.out.print("Problem checking for invoice copy.");
         e.printStackTrace();
     }
     
@@ -705,7 +705,82 @@ customerCode, String salesPersonCode, String invoiceDate) {
  * the given number of units
  */
 public static void addMovieTicketToInvoice(String invoiceCode, 
-String productCode, int quantity) {}
+String productCode, int quantity) {
+	
+	int invoiceID = 0;
+	int movieID = 0;
+	boolean movieExists = false;
+	ResultSet rs = null;
+	
+	String getInvoice = "SELECT id FROM Invoice WHERE InvoiceCode = ?";
+	String getMovie = "SELECT id FROM Movies WHERE ProductCode = ?";
+	String checkDuplicate = "SELECT * FROM Invoice_Products WHERE InvoiceID = ? AND MovieID = ?";
+	String addDuplicate = "UPDATE Invoice_Products SET quantity = quantity + ? WHERE InvoiceID = ? AND MovieID = ?";
+	String insertMovie = "INSERT INTO Invoice_Products(InvoiceID, MovieID, Quantity) VALUES(?,?,?)";
+	
+	try {
+        conn = DatabaseInfo.getConnection();
+        ps = conn.prepareStatement(getInvoice);
+        ps.setString(1, invoiceCode);
+        ps.close();
+        rs = ps.executeQuery();
+        if(rs.next()) {
+            invoiceID = rs.getInt("id");
+        }
+        rs = null;
+        ps = conn.prepareStatement(getMovie);
+        ps.setString(1, productCode);
+        rs = ps.executeQuery();
+        if(rs.next()) {
+            movieID = rs.getInt("id");
+        }
+    }
+    catch (SQLException e) {
+        System.out.print("Problem getting ids.");
+        e.printStackTrace();
+    }
+	rs = null;
+	 try {
+	        conn = DatabaseInfo.getConnection();
+	        ps = conn.prepareStatement(checkDuplicate);
+	        ps.setInt(1, invoiceID);
+	        ps.setInt(1, movieID);
+	        rs = ps.executeQuery();
+	        if(rs.next()) {
+	            movieExists = true;
+	        }
+	    } catch (SQLException e) {
+	        System.out.print("Problem checking for invoice product");
+	        e.printStackTrace();
+	    }
+	rs = null;
+	
+	if(movieExists) {
+		try {
+            ps = conn.prepareStatement(addDuplicate);
+            ps.setInt(1, quantity);
+            ps.setInt(2, invoiceID);
+            ps.setInt(3, movieID);
+            ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.print("Problem updating invoice product quantity");
+            e.printStackTrace();
+        } 
+	}else {
+		try {
+            ps = conn.prepareStatement(insertMovie);
+            ps.setInt(1, invoiceID);
+            ps.setInt(2, movieID);
+            ps.setInt(3, quantity);
+            ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.print("Problem adding invoice product.");
+            e.printStackTrace();
+        } 
+	}
+}
 /*
  * 13. Adds a particular seasonpass (corresponding to 
 <code>productCode</code>
