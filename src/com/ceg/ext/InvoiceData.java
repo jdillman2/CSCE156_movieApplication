@@ -476,7 +476,8 @@ String seasonStartDate, String seasonEndDate, double cost) {
             System.out.print("Problem adding season pass.");
             e.printStackTrace();
         }
-        
+    }
+    
     //Close resources.
     try {
             conn.close();
@@ -485,7 +486,7 @@ String seasonStartDate, String seasonEndDate, double cost) {
     catch (SQLException f) {
             f.printStackTrace();
     }
-    }
+  
 }
 /**
  * 8. Adds a ParkingPass record to the database with the provided 
@@ -527,7 +528,9 @@ parkingFee) {
             System.out.print("Problem adding parking pass.");
             e.printStackTrace();
         }
-        
+       
+    }
+    
     //Close resources.
     try {
             conn.close();
@@ -536,7 +539,7 @@ parkingFee) {
     catch (SQLException f) {
             f.printStackTrace();
     }
-}
+
 }
 /**
  * 9. Adds a refreshment record to the database with the provided 
@@ -568,7 +571,6 @@ double cost) {
     if(copy == false) {
         
         try {
-            
             ps = conn.prepareStatement(updateR);
             ps.setString(1, productCode);
             ps.setString(2, name);
@@ -579,7 +581,8 @@ double cost) {
             System.out.print("Problem adding refreshment.");
             e.printStackTrace();
         }
-        
+    }
+    
     //Close resources.
     try {
             conn.close();
@@ -588,7 +591,7 @@ double cost) {
     catch (SQLException f) {
             f.printStackTrace();
     }
-}
+
 }
 /**
  * 10. Removes all invoice records from the database
@@ -632,14 +635,13 @@ customerCode, String salesPersonCode, String invoiceDate) {
 	
 	String getPersonID = "SELECT id FROM Persons WHERE personCode = ?";
     String getCustomerID = "SELECT id FROM Customers WHERE customerCode = ?";
-    String testForInvoiceCopy = "SELECT * FROM Customers WHERE InvoiceCode = ?";
+    String testForInvoiceCopy = "SELECT * FROM Invoice WHERE InvoiceCode = ?";
     String addInvoice = "INSERT INTO Invoice(InvoiceCode, CustomerID, SalesPersonID, InvoiceDate) VALUES (?, ?, ?, ?);";
     
     try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(getPersonID);
         ps.setString(1, salesPersonCode);
-        ps.close();
         rs = ps.executeQuery();
         if(rs.next()) {
             pID = rs.getInt("id");
@@ -660,7 +662,6 @@ customerCode, String salesPersonCode, String invoiceDate) {
     boolean copy = false;
     
     try {
-        conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(testForInvoiceCopy);
         ps.setString(1, invoiceCode);
         rs = ps.executeQuery();
@@ -715,14 +716,13 @@ String productCode, int quantity) {
 	String getInvoice = "SELECT id FROM Invoice WHERE InvoiceCode = ?";
 	String getMovie = "SELECT id FROM Movies WHERE ProductCode = ?";
 	String checkDuplicate = "SELECT * FROM Invoice_Products WHERE InvoiceID = ? AND MovieID = ?";
-	String addDuplicate = "UPDATE Invoice_Products SET quantity = quantity + ? WHERE InvoiceID = ? AND MovieID = ?";
+	String addDuplicate = "UPDATE Invoice_Products SET Quantity = Quantity + ? WHERE InvoiceID = ? AND MovieID = ?";
 	String insertMovie = "INSERT INTO Invoice_Products(InvoiceID, MovieID, Quantity) VALUES(?,?,?)";
 	
 	try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(getInvoice);
         ps.setString(1, invoiceCode);
-        ps.close();
         rs = ps.executeQuery();
         if(rs.next()) {
             invoiceID = rs.getInt("id");
@@ -741,10 +741,9 @@ String productCode, int quantity) {
     }
 	rs = null;
 	 try {
-	        conn = DatabaseInfo.getConnection();
 	        ps = conn.prepareStatement(checkDuplicate);
 	        ps.setInt(1, invoiceID);
-	        ps.setInt(1, movieID);
+	        ps.setInt(2, movieID);
 	        rs = ps.executeQuery();
 	        if(rs.next()) {
 	            movieExists = true;
@@ -780,6 +779,15 @@ String productCode, int quantity) {
             e.printStackTrace();
         } 
 	}
+	
+	 //Close resources.
+    try {
+    		conn.close();
+    		ps.close();
+    }
+    catch (SQLException f) {
+        	f.printStackTrace();
+    }
 }
 /*
  * 13. Adds a particular seasonpass (corresponding to 
@@ -789,7 +797,90 @@ String productCode, int quantity) {
  * the given begin/end dates
  */
 public static void addSeasonPassToInvoice(String invoiceCode, String 
-productCode, int quantity) {}
+productCode, int quantity) {
+	
+	int invoiceID = 0;
+	int seasonPassID = 0;
+	boolean spExists = false;
+	ResultSet rs = null;
+	
+	String getInvoice = "SELECT id FROM Invoice WHERE InvoiceCode = ?";
+	String getSeasonPass = "SELECT id FROM Season_Pass WHERE ProductCode = ?";
+	String checkDuplicate = "SELECT * FROM Invoice_Products WHERE InvoiceID = ? AND SeasonPassID = ?";
+	String addDuplicate = "UPDATE Invoice_Products SET Quantity = Quantity + ? WHERE InvoiceID = ? AND SeasonPassID = ?";
+	String insertSP = "INSERT INTO Invoice_Products(InvoiceID, SeasonPassID, Quantity) VALUES(?,?,?)";
+	
+	try {
+        conn = DatabaseInfo.getConnection();
+        ps = conn.prepareStatement(getInvoice);
+        ps.setString(1, invoiceCode);
+        rs = ps.executeQuery();
+        if(rs.next()) {
+            invoiceID = rs.getInt("id");
+        }
+        rs = null;
+        ps = conn.prepareStatement(getSeasonPass);
+        ps.setString(1, productCode);
+        rs = ps.executeQuery();
+        if(rs.next()) {
+            seasonPassID = rs.getInt("id");
+        }
+    }
+    catch (SQLException e) {
+        System.out.print("Problem getting ids.");
+        e.printStackTrace();
+    }
+	rs = null;
+	 try {
+	        ps = conn.prepareStatement(checkDuplicate);
+	        ps.setInt(1, invoiceID);
+	        ps.setInt(2, seasonPassID);
+	        rs = ps.executeQuery();
+	        if(rs.next()) {
+	            spExists = true;
+	        }
+	    } catch (SQLException e) {
+	        System.out.print("Problem checking for invoice product");
+	        e.printStackTrace();
+	    }
+	rs = null;
+	
+	if(spExists) {
+		try {
+            ps = conn.prepareStatement(addDuplicate);
+            ps.setInt(1, quantity);
+            ps.setInt(2, invoiceID);
+            ps.setInt(3, seasonPassID);
+            ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.print("Problem updating invoice product quantity");
+            e.printStackTrace();
+        } 
+	}else {
+		try {
+            ps = conn.prepareStatement(insertSP);
+            ps.setInt(1, invoiceID);
+            ps.setInt(2, seasonPassID);
+            ps.setInt(3, quantity);
+            ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.print("Problem adding invoice product.");
+            e.printStackTrace();
+        } 
+	}
+	
+	 //Close resources.
+    try {
+    		conn.close();
+    		ps.close();
+    }
+    catch (SQLException f) {
+        	f.printStackTrace();
+    }
+	
+}
 /**
 *  14. Adds a particular ParkingPass (corresponding to 
 <code>productCode</code> to an
@@ -799,7 +890,122 @@ with the given
 *  NOTE: ticketCode may be null
 */
 public static void addParkingPassToInvoice(String invoiceCode, String 
-productCode, int quantity, String ticketCode) {}
+productCode, int quantity, String ticketCode) {
+
+	int invoiceID = 0;
+	int parkingPassID = 0;
+	int matchingMovieID = 0;
+	boolean ppExists = false;
+	ResultSet rs = null;
+	
+	String getInvoice = "SELECT id FROM Invoice WHERE InvoiceCode = ?";
+	String getParkingPass = "SELECT id FROM Parking_Pass WHERE ProductCode = ?";
+	String getMatchingMovie = "SELECT id FROM Movies WHERE ProductCode = ?";
+	String checkDuplicate = "SELECT * FROM Invoice_Products WHERE InvoiceID = ? AND ParkingPassID = ?";
+	String addDuplicate = "UPDATE Invoice_Products SET Quantity = Quantity + ? WHERE InvoiceID = ? AND ParkingPassID = ?";
+	String updateMovie = "UPDATE Invoice_Products SET ParkingMovieID = ? WHERE InvoiceID = ? AND ParkingPassID = ?";
+	String insertPP = "INSERT INTO Invoice_Products(InvoiceID, ParkingPassID, Quantity) VALUES(?,?,?)";
+	
+	try {
+        conn = DatabaseInfo.getConnection();
+        ps = conn.prepareStatement(getInvoice);
+        ps.setString(1, invoiceCode);
+        rs = ps.executeQuery();
+        if(rs.next()) {
+            invoiceID = rs.getInt("id");
+        }
+        rs = null;
+        ps = conn.prepareStatement(getParkingPass);
+        ps.setString(1, productCode);
+        rs = ps.executeQuery();
+        if(rs.next()) {
+            parkingPassID = rs.getInt("id");
+        }
+    }
+    catch (SQLException e) {
+        System.out.print("Problem getting ids.");
+        e.printStackTrace();
+    }
+	rs = null;
+	 try {
+	        ps = conn.prepareStatement(checkDuplicate);
+	        ps.setInt(1, invoiceID);
+	        ps.setInt(2, parkingPassID);
+	        rs = ps.executeQuery();
+	        if(rs.next()) {
+	            ppExists = true;
+	        }
+	    } catch (SQLException e) {
+	        System.out.print("Problem checking for invoice product");
+	        e.printStackTrace();
+	    }
+	rs = null;
+	
+	if(ppExists) {
+		try {
+            ps = conn.prepareStatement(addDuplicate);
+            ps.setInt(1, quantity);
+            ps.setInt(2, invoiceID);
+            ps.setInt(3, parkingPassID);
+            ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.print("Problem updating invoice product quantity");
+            e.printStackTrace();
+        } 
+	}else {
+		try {
+            ps = conn.prepareStatement(insertPP);
+            ps.setInt(1, invoiceID);
+            ps.setInt(2, parkingPassID);
+            ps.setInt(3, quantity);
+            ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.print("Problem adding invoice product.");
+            e.printStackTrace();
+        } 
+	}
+	
+	if(ticketCode != null) {
+		try {
+			rs = null;
+            ps = conn.prepareStatement(getMatchingMovie);
+            ps.setString(1, ticketCode);
+            rs = ps.executeQuery();
+             
+            if (rs.next()) {
+            	matchingMovieID = rs.getInt("id");
+            }
+        }
+        catch (SQLException e) {
+            System.out.print("Problem getting corresponding movieID for parking pass.");
+            e.printStackTrace();
+        }
+		
+		try {
+            ps = conn.prepareStatement(updateMovie);
+            ps.setInt(1, matchingMovieID);
+            ps.setInt(2, invoiceID);
+            ps.setInt(3, parkingPassID);
+            ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.print("Problem setting corresponding movieID for parking pass.");
+            e.printStackTrace();
+        }
+	}
+	
+	 //Close resources.
+    try {
+    		conn.close();
+    		ps.close();
+    }
+    catch (SQLException f) {
+        	f.printStackTrace();
+    }
+	
+}
 /**
 *  15. Adds a particular refreshment (corresponding to 
 <code>productCode</code> to an
@@ -808,6 +1014,88 @@ with the given
 *  number of quantity.
 */
 public static void addRefreshmentToInvoice(String invoiceCode, String 
-productCode, int quantity) {}
-}
+productCode, int quantity) {
 
+	int invoiceID = 0;
+	int refreshmentID = 0;
+	boolean rExists = false;
+	ResultSet rs = null;
+	
+	String getInvoice = "SELECT id FROM Invoice WHERE InvoiceCode = ?";
+	String getRefreshment = "SELECT id FROM Refreshment WHERE ProductCode = ?";
+	String checkDuplicate = "SELECT * FROM Invoice_Products WHERE InvoiceID = ? AND RefreshmentID = ?";
+	String addDuplicate = "UPDATE Invoice_Products SET Quantity = Quantity + ? WHERE InvoiceID = ? AND RefreshmentID = ?";
+	String insertR = "INSERT INTO Invoice_Products(InvoiceID, RefreshmentID, Quantity) VALUES(?,?,?)";
+	
+	try {
+        conn = DatabaseInfo.getConnection();
+        ps = conn.prepareStatement(getInvoice);
+        ps.setString(1, invoiceCode);
+        rs = ps.executeQuery();
+        if(rs.next()) {
+            invoiceID = rs.getInt("id");
+        }
+        rs = null;
+        ps = conn.prepareStatement(getRefreshment);
+        ps.setString(1, productCode);
+        rs = ps.executeQuery();
+        if(rs.next()) {
+            refreshmentID = rs.getInt("id");
+        }
+    }
+    catch (SQLException e) {
+        System.out.print("Problem getting ids.");
+        e.printStackTrace();
+    }
+	rs = null;
+	 try {
+	        ps = conn.prepareStatement(checkDuplicate);
+	        ps.setInt(1, invoiceID);
+	        ps.setInt(2, refreshmentID);
+	        rs = ps.executeQuery();
+	        if(rs.next()) {
+	            rExists = true;
+	        }
+	    } catch (SQLException e) {
+	        System.out.print("Problem checking for invoice product");
+	        e.printStackTrace();
+	    }
+	rs = null;
+	
+	if(rExists) {
+		try {
+            ps = conn.prepareStatement(addDuplicate);
+            ps.setInt(1, quantity);
+            ps.setInt(2, invoiceID);
+            ps.setInt(3, refreshmentID);
+            ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.print("Problem updating invoice product quantity");
+            e.printStackTrace();
+        } 
+	}else {
+		try {
+            ps = conn.prepareStatement(insertR);
+            ps.setInt(1, invoiceID);
+            ps.setInt(2, refreshmentID);
+            ps.setInt(3, quantity);
+            ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.print("Problem adding invoice product.");
+            e.printStackTrace();
+        } 
+	}
+	
+	 //Close resources.
+    try {
+    		conn.close();
+    		ps.close();
+    }
+    catch (SQLException f) {
+        	f.printStackTrace();
+    }
+	
+}
+}
