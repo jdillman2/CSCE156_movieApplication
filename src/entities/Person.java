@@ -1,7 +1,15 @@
 package entities;
 
+import java.util.Arrays;
+
 public class Person {
 	
+	@Override
+	public String toString() {
+		return "Person [personCode=" + personCode + ", lName=" + lName + ", fName=" + fName + ", personAddress="
+				+ personAddress.toString() + ", emails=" + Arrays.toString(emails) + "]";
+	}
+
 	String personCode;
 	String lName;
 	String fName;

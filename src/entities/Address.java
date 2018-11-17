@@ -1,6 +1,11 @@
 package entities;
 //This is a test comment
 public class Address {
+	@Override
+	public String toString() {
+		return "Address [street=" + street + ", city=" + city + ", state=" + state + ", zip=" + zip + ", country="
+				+ country + "]";
+	}
 	private String street = null;
 	private String city = null;
 	private String state = null;
