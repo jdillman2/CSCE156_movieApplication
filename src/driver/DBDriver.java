@@ -2,6 +2,7 @@ package driver;
 
 import java.util.ArrayList;
 
+import entities.Customer;
 import entities.Person;
 import readers.DatabaseReader;
 
@@ -17,9 +18,9 @@ public class DBDriver {
 	     //}
 		DatabaseReader db = new DatabaseReader();
 		ArrayList<Person> personList = db.readPersonsDB();
-		
-		for(Person p:personList) {
-			System.out.println(p.toString());
+		ArrayList<Customer> customerList = db.readCustomersDB();
+		for(Customer c: customerList) {
+			System.out.println(c.toString());
 		}
 	}
 

@@ -70,6 +70,15 @@ public abstract class Customer {
 		this.address = address;
 	}
 	
+	@Override
+	public String toString() {
+		return "Customer [customerCode=" + customerCode + ", type=" + type + ", primaryContactCode="
+				+ primaryContactCode + ", primaryContact=" + primaryContact.toString() 
+				+ ", name=" + name + ", address=" + address.toString()
+				+ "]";
+	}
+
+
 	public abstract double getCustomerFee();
 	public abstract double getDiscountRate();
 	public abstract String getFullType();
