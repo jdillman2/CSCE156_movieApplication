@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import entities.Customer;
 import entities.Person;
+import entities.Product;
 import readers.DatabaseReader;
 
 public class DBDriver {
@@ -21,6 +22,10 @@ public class DBDriver {
 		ArrayList<Customer> customerList = db.readCustomersDB();
 		for(Customer c: customerList) {
 			System.out.println(c.toString());
+		}
+		ArrayList<Product> productList1 = db.readProductsDB();
+		for(Product p: productList1) {
+			System.out.println(p.toString());
 		}
 	}
 

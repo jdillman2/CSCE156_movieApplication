@@ -1,6 +1,7 @@
 package entities;
 
 public abstract class Product {
+	
 	private String productCode;
 	private String productType;
 	private double price;
@@ -36,6 +37,13 @@ public abstract class Product {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
+
+	@Override
+	public String toString() {
+		return "Product [productCode=" + productCode + ", productType=" + productType + ", price=" + price + "]";
+	}
+	
 	//Abstract classes that will get called from each individual product type
 	public abstract double getTAX();
 	public abstract double getSubtotal();
