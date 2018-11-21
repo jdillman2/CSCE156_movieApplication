@@ -1,14 +1,10 @@
 package readers;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import com.ceg.ext.DatabaseInfo;
 
 import entities.Address;
@@ -91,9 +87,9 @@ public class DatabaseReader {
 	    			}
 	    		}
 	    		if(type.equals("Student")) {
-	    			customerList.add(new Student(code,type,rs.getString(2),primaryContact,name,customerAddress));
+	    			customerList.add(new Student(code,"S",rs.getString(2),primaryContact,name,customerAddress));
 	    		}else {
-	    			customerList.add(new General(code,type,rs.getString(2),primaryContact,name,customerAddress));
+	    			customerList.add(new General(code,"G",rs.getString(2),primaryContact,name,customerAddress));
 	    		}
 	    	}
 	        rs.close();

@@ -16,38 +16,43 @@ import entities.Person;
 import entities.Product;
 import entities.Refreshment;
 import entities.SeasonPass;
-import readers.FlatFileReader;
+import lists.LinkedList;
+import readers.*;
 
 public class InvoiceReport {
 
     public static void main(String[] args) {
         //Read invoices to invoice ArrayList
-        FlatFileReader ffr = new FlatFileReader();
-        ArrayList<Invoice> invoices = ffr.readInvoices();
-        
+        //FlatFileReader ffr = new FlatFileReader();
+        DatabaseReader dbr = new DatabaseReader();
+        //ArrayList<Invoice> invoices = ffr.readInvoices();
+        LinkedList<Invoice> invoices = dbr.readInvoicesToList();
         //Generate summary report
-        generateSummaryReport(invoices);
+        generateSummaryReportFromList(invoices);
         
         //Print invoices header
         System.out.println("Invididual Invoice Detail Reports\n"
                 + "=========================================================");
         //For each invoice, print a detailed report
-        for(Invoice i : invoices) {
-            generateDetailReport(i);
+        //for(Invoice i : invoices) {
+        for(int i = 1; i <= invoices.getSize(); i++) {
+        	Invoice thisInvoice = invoices.getObject(i);
+            generateDetailReport(thisInvoice);
             System.out.printf("%102s", "=================================\n");
-            System.out.printf("%-67s $%10.2f $%9.2f $%9.2f", "SUB-TOTALS", i.getInvoiceSubTotal(), i.getInvoiceTax(), i.getInvoiceTotalofTotals());
-            if(i.getInvoiceDiscount() > 0)
+            System.out.printf("%-67s $%10.2f $%9.2f $%9.2f", "SUB-TOTALS", thisInvoice.getInvoiceSubTotal(), 
+            		thisInvoice.getInvoiceTax(), thisInvoice.getInvoiceTotalofTotals());
+            if(thisInvoice.getInvoiceDiscount() > 0)
             {
             	  System.out.print("\nDISCOUNT ( 8% STUDENT AND NO TAX )");
-            	  double discount = 0 - i.getInvoiceDiscount();
+            	  double discount = 0 - thisInvoice.getInvoiceDiscount();
             	  System.out.printf("%57s$%9.2f", "", discount);
             }
-            if(i.getInvoiceAdditionalFee() > 0)
+            if(thisInvoice.getInvoiceAdditionalFee() > 0)
             {
             	 System.out.print("\nADDITIONAL FEE (Student)");
-           	     System.out.printf("%67s$%9.2f", "", i.getInvoiceAdditionalFee());
+           	     System.out.printf("%67s$%9.2f", "", thisInvoice.getInvoiceAdditionalFee());
             }
-            System.out.printf("\n%-89s  $%9.2f", "TOTAL", i.getInvoiceGrandTotal());
+            System.out.printf("\n%-89s  $%9.2f", "TOTAL", thisInvoice.getInvoiceGrandTotal());
             System.out.println();
             System.out.println();
             System.out.print("\t\t\tThank you for your purchase!");
@@ -77,6 +82,32 @@ public class InvoiceReport {
         	iTaxes += i.getInvoiceTax();
         	iDiscounts += i.getInvoiceDiscount() * -1;
         	iTotals += i.getInvoiceGrandTotal();
+        }
+    	System.out.println("======================================================================================"
+    			+ "===================================");
+    	System.out.printf("%-66s %2s %7.2f %2s %7.2f "
+    			+ "%2s %7.2f %2s %7.2f %2s %7.2f"
+    			+ "\n\n\n\n\n\n", "TOTALS", "$", iSubtotals, "$", iFees, "$", iTaxes, "$", iDiscounts, "$", iTotals);
+    }
+    
+    private static void generateSummaryReportFromList(LinkedList<Invoice> invoices) {
+    	double iSubtotals = 0.0;
+    	double iFees = 0.0;
+    	double iTaxes = 0.0;
+    	double iDiscounts = 0.0;
+    	double iTotals = 0.0;
+    	System.out.print("=========================\nEXECUTIVE SUMMARY REPORT\n");
+    	System.out.printf("%-66s\n", "=========================");
+    	System.out.printf("%-8s %-36s %-21s %9s %10s %10s %10s %10s\n" , "Invoice", "Customer", "Salesperson", 
+    			"Subtotal", "Fees", "Taxes", "Discount","Total");
+    	for(int i = 1; i <= invoices.getSize(); i++) {
+        	Invoice thisInvoice = invoices.getObject(i);
+        	thisInvoice.printSummaryTotal();
+        	iSubtotals += thisInvoice.getInvoiceSubTotal();
+        	iFees += thisInvoice.getCustomer().getCustomerFee();
+        	iTaxes += thisInvoice.getInvoiceTax();
+        	iDiscounts += thisInvoice.getInvoiceDiscount() * -1;
+        	iTotals += thisInvoice.getInvoiceGrandTotal();
         }
     	System.out.println("======================================================================================"
     			+ "===================================");
