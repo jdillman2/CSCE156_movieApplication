@@ -23,9 +23,7 @@ public class InvoiceReport {
 
     public static void main(String[] args) {
         //Read invoices to invoice ArrayList
-        //FlatFileReader ffr = new FlatFileReader();
         DatabaseReader dbr = new DatabaseReader();
-        //ArrayList<Invoice> invoices = ffr.readInvoices();
         LinkedList<Invoice> invoices = dbr.readInvoicesToList();
         //Generate summary report
         generateSummaryReportFromList(invoices);
