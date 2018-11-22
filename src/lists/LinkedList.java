@@ -8,14 +8,12 @@ public class LinkedList<E> extends TotalComparator<E> implements Iterable<E> {
 	private int size;
 	
     public void clear() {
-    	//throw new UnsupportedOperationException("Not yet implemented.");
     	this.start = null;
     	this.end = null;
     	size = 0;
     }
 
     public void addToStart(E object) {
-    	//throw new UnsupportedOperationException("Not yet implemented.");
     	ListNode<E> aNode = new ListNode<E>(object);
     	size++;
     	if(start == null) {
@@ -28,7 +26,6 @@ public class LinkedList<E> extends TotalComparator<E> implements Iterable<E> {
     }
 
     public void addToEnd(E Object) {
-    	//throw new UnsupportedOperationException("Not yet implemented.");
     	ListNode<E> aNode = new ListNode<E>(Object);
     	size++;
     	if(start == null) {
@@ -93,7 +90,6 @@ public class LinkedList<E> extends TotalComparator<E> implements Iterable<E> {
     }
 
     public boolean remove(int position) {
-    	//throw new UnsupportedOperationException("Not yet implemented.");
     	if(position < 1 || position > size) {
     		throw new IndexOutOfBoundsException("Index out of Bounds");
     	}
@@ -133,7 +129,6 @@ public class LinkedList<E> extends TotalComparator<E> implements Iterable<E> {
     }
     
     private ListNode<E> getListNode(int position) {
-    	//throw new UnsupportedOperationException("Not yet implemented.");
     	if(position < 1 || position > size) {
     		throw new IndexOutOfBoundsException("There is no item at index: " + position);
     	}

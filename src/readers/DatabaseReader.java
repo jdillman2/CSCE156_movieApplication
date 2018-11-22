@@ -34,6 +34,7 @@ public class DatabaseReader {
 				"GROUP BY personCode, lName, fName, street, city, state, postalCode, country;";
 		ResultSet rs = null;
 		
+		//read in the records from the Persons table and create instances of java Person objects
 		try {
 			conn = DatabaseInfo.getConnection();
 	        ps = conn.prepareStatement(getPersons);
@@ -49,6 +50,8 @@ public class DatabaseReader {
 	    		}
 	    		personList.add(new Person(code, lName, fName, personAddress, emails));
 	    	}
+	        
+	        //Close resources
 	        rs.close();
 	        ps.close();
 	        conn.close();
@@ -71,6 +74,7 @@ public class DatabaseReader {
 				"GROUP BY personCode, lName, fName, street, city, state, postalCode, country;";
 		ResultSet rs = null;
 		
+		//read in the records from the Customers table and create instances of java Student and General Student objects
 		try {
 			conn = DatabaseInfo.getConnection();
 	        ps = conn.prepareStatement(getPersons);
@@ -92,6 +96,8 @@ public class DatabaseReader {
 	    			customerList.add(new General(code,"G",rs.getString(2),primaryContact,name,customerAddress));
 	    		}
 	    	}
+	        
+	        //Close resources
 	        rs.close();
 	        ps.close();
 	        conn.close();
@@ -110,7 +116,7 @@ public class DatabaseReader {
 		String getMovies = "SELECT * FROM Movies LEFT JOIN Address ON Movies.id=Address.ProductID WHERE Movies.id > 0;";
 		ResultSet rs = null;
 		
-		//Get Refreshments
+		//read in the records from the Refreshment table and create instances of java Refreshment objects
 	    try {
 	    	conn = DatabaseInfo.getConnection();
 	    	ps = conn.prepareStatement(getRefreshments);
@@ -131,7 +137,7 @@ public class DatabaseReader {
 	    	e.printStackTrace();
 	    }
 	    
-	    //Get SeasonPasses
+		//read in the records from the Season_Pass table and create instances of java SeasonPass objects
 		try {
 			ps = conn.prepareStatement(getSeasonPasses);
 			rs = ps.executeQuery();
@@ -154,7 +160,7 @@ public class DatabaseReader {
 	    	e.printStackTrace();
 	    }
 		 
-		//Get ParkingPasses
+		//read in the records from the Parking_Pass table and create instances of java ParkingPass objects
 		try {
 			ps = conn.prepareStatement(getParkingPasses);
 			rs = ps.executeQuery();
@@ -173,7 +179,7 @@ public class DatabaseReader {
 	    }
 		 
 		
-		//Get Movies
+		//read in the records from the Movies table and create instances of java Movie objects
 				try {
 					ps = conn.prepareStatement(getMovies);
 					rs = ps.executeQuery();
@@ -222,6 +228,9 @@ public class DatabaseReader {
 		
 		
 		ResultSet rs = null;
+		
+		//Query String that will concatenate values from the database in an identical format to the flat files for Invoice.
+		//This is useful to reuse much of our code written to readInvoices from a flat file format.
 		String getInvoicesFlatFormat = "SELECT CONCAT(inv_data,product) FROM\r\n" + 
 				"                (SELECT x.id, inv_data,\r\n" + 
 				"                GROUP_CONCAT(CONCAT(y.productCode,y.quantity,y.movieCode)) as product\r\n" + 

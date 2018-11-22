@@ -25,6 +25,8 @@ public static void removeAllPersons() {
     String delete1 = "DELETE FROM Email;"; 
     String delete2 = "DELETE FROM Address WHERE PersonID > 0;"; 
     String delete3 = "DELETE FROM Persons WHERE id > 0;";
+    
+    //Remove records from Email, Address, Persons tables and set SalesPersonID to default value
     try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(update1);
@@ -46,6 +48,8 @@ public static void removeAllPersons() {
         // TODO Auto-generated catch block
         e.printStackTrace();
     }
+    
+    //Close resources
     finally {
         try {
             ps.close();
@@ -78,6 +82,8 @@ String country) {
     String insertA = "INSERT INTO Address(PersonID, Street, City, State, PostalCode, Country)\r\n"+
                      "VALUES(?,?,?,?,?,?);";
     int newID = 0;
+    
+    //Add new record to Persons table and new record to Address table
     try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(insertP);
@@ -106,7 +112,8 @@ String country) {
     } catch (SQLException e) {
         e.printStackTrace();
       } 
-    //Close resources.
+    
+    //Close resources
     finally {
           try {
             ps.close();
@@ -131,6 +138,8 @@ public static void addEmail(int personCode , String email) {
     String addEmail = "INSERT INTO Email(accountID, email) VALUES (?, ?);";
     boolean copy = false;
     ResultSet rs = null;
+    
+    //Check for record with duplicate values in Email table
     try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(testForEmailCopy);
@@ -145,6 +154,8 @@ public static void addEmail(int personCode , String email) {
         System.out.print("Problem checking for copy of email.");
         e.printStackTrace();
       }
+    
+    //If the record does not have a duplicate, add it to the Email table
     if(copy == false)
     {
         try {
@@ -159,7 +170,7 @@ public static void addEmail(int personCode , String email) {
           }
     } 
     
-    //Close resources.
+    //Close resources
     try {
             conn.close();
             ps.close();
@@ -177,6 +188,9 @@ public static void removeAllCustomers() {
     String updateAddress = "DELETE FROM Address WHERE CustomerID > 0;";
     String updateCustomers = "DELETE FROM Customers WHERE id > 0;";
     
+    //Update CustomerID column to default value in Invoice table
+    //Delete Address records with a non-default CustomerID value
+    //Delete all records from Customers table
     try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(updateInvoice);
@@ -191,7 +205,8 @@ public static void removeAllCustomers() {
         System.out.print("Problem deleting customers from database.");
         e.printStackTrace();
     } 
-    //Close resources.
+    
+    //Close resources
     finally {
           try {
             ps.close();
@@ -207,6 +222,7 @@ public static void removeAllCustomers() {
 public static void addCustomer(String customerCode, String 
 customerType, String primaryContactPersonCode,String name, String street, 
 String city, String state, String zip, String country) {
+	
     //Assign value for customer type
     int cType = 1;
     int pContactID = 0;
@@ -222,6 +238,7 @@ String city, String state, String zip, String country) {
     String addAddress = "INSERT INTO Address(CustomerID, Street, City, State, PostalCode, Country) VALUES (?, ?, ?, ?, ?, ?);";
     String addCustomer = "INSERT INTO Customers(customerCode, lname, primaryContact, category) VALUES (?, ?, ?, ?);";
     
+    //Get the id value using the primaryContactPersonCode
     try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(getPContactID);
@@ -239,6 +256,7 @@ String city, String state, String zip, String country) {
     rs = null;
     boolean copy = false;
     
+    //Check for duplicate record in Customers table
     try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(testForCustomerCopy);
@@ -252,6 +270,8 @@ String city, String state, String zip, String country) {
         System.out.print("Problem checking for copy of customer.");
         e.printStackTrace();
       }
+    
+    //If there is no duplicate record, add to Customers table
     if(copy == false)
     {
         int cID = 0;
@@ -267,6 +287,8 @@ String city, String state, String zip, String country) {
             System.out.print("Problem adding customer.");
             e.printStackTrace();
           }
+        
+        //Obtain the id value for the new customer
         try {
             ps = conn.prepareStatement(getNewCustomerID);
             ps.setString(1, customerCode);
@@ -280,6 +302,8 @@ String city, String state, String zip, String country) {
             System.out.print("Problem getting customerID.");
             e.printStackTrace();
           }
+        
+        //Add new record to Address table for the new customer
         try {
             ps = conn.prepareStatement(addAddress);
             ps.setInt(1, cID);
@@ -294,7 +318,8 @@ String city, String state, String zip, String country) {
                 e.printStackTrace();
           }
     } 
-    //Close resources.
+    
+    //Close resources
     try {
             conn.close();
             ps.close();
@@ -314,6 +339,9 @@ public static void removeAllProducts() {
     String updateSeasonPass = "DELETE FROM Season_Pass WHERE id > 0;";
     String updateRefreshment = "DELETE FROM Refreshment WHERE id > 0;";
     String updateParkingPass = "DELETE FROM Parking_Pass WHERE id > 0;";
+    
+    //Remove Address records corresponding with a productID
+    //Remove all records from InvoiceProducts, Movies, Season_Pass, Refreshment, Parking_Pass
     try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(updatePAddress);
@@ -339,7 +367,7 @@ public static void removeAllProducts() {
         e.printStackTrace();
       }
     
-    //Close resources.
+    //Close resources
         try {
                 conn.close();
                 ps.close();
@@ -364,7 +392,8 @@ String zip, String country, String screenNo, double pricePerUnit) {
     int movieID = 0;
     
     boolean copy = false;
-    //Check for copy
+    
+    //Check for duplicate values in Movies table
     try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(checkForMovieCopy);
@@ -378,7 +407,8 @@ String zip, String country, String screenNo, double pricePerUnit) {
         System.out.print("Problem checking for movie copy.");
         e.printStackTrace();
     }
-    //If no copy, create new row in Movies and Address
+    
+    //If no duplicate record, add new record to Movies
     if(copy == false) {
         
         try {
@@ -395,6 +425,8 @@ String zip, String country, String screenNo, double pricePerUnit) {
             System.out.print("Problem adding movie.");
             e.printStackTrace();
         }
+        
+        //Obtain new Movies record's id value
         try {
             ps = conn.prepareStatement(getProductID);
             ps.setString(1, productCode);
@@ -409,6 +441,8 @@ String zip, String country, String screenNo, double pricePerUnit) {
             System.out.print("Problem getting movieID.");
             e.printStackTrace();
         }
+        
+        //Update Address with new record corresponding with movieID
         try {
             ps = conn.prepareStatement(updateAddress);
             ps.setInt(1, movieID);
@@ -424,7 +458,8 @@ String zip, String country, String screenNo, double pricePerUnit) {
             e.printStackTrace();
         }
     }
-    //Close resources.
+    
+    //Close resources
     try {
             conn.close();
             ps.close();
@@ -445,7 +480,8 @@ String seasonStartDate, String seasonEndDate, double cost) {
     ResultSet rs = null;
     
     boolean copy = false;
-    //Check for copy
+    
+    //Check for duplicate record in Season_Pass table
     try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(checkForSPCopy);
@@ -459,7 +495,8 @@ String seasonStartDate, String seasonEndDate, double cost) {
         System.out.print("Problem checking for season pass copy.");
         e.printStackTrace();
     }
-    //If no copy, create new row in Season_Pass
+    
+    //If no duplicate record, add new record to Season_Pass
     if(copy == false) {
         
         try {
@@ -478,7 +515,7 @@ String seasonStartDate, String seasonEndDate, double cost) {
         }
     }
     
-    //Close resources.
+    //Close resources
     try {
             conn.close();
             ps.close();
@@ -500,7 +537,8 @@ parkingFee) {
     ResultSet rs = null;
     
     boolean copy = false;
-    //Check for copy
+    
+    //Check for duplicate record in Parking_Pass table
     try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(checkForPPCopy);
@@ -514,7 +552,8 @@ parkingFee) {
         System.out.print("Problem checking for parking pass copy.");
         e.printStackTrace();
     }
-    //If no copy, create new row in Parking_Pass
+    
+    //If no duplicate record, add new record to Parking_Pass
     if(copy == false) {
         
         try {
@@ -531,7 +570,7 @@ parkingFee) {
        
     }
     
-    //Close resources.
+    //Close resources
     try {
             conn.close();
             ps.close();
@@ -553,7 +592,8 @@ double cost) {
     ResultSet rs = null;
     
     boolean copy = false;
-    //Check for copy
+    
+    //Check for duplicate record in Refreshment table
     try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(checkForRCopy);
@@ -567,7 +607,8 @@ double cost) {
         System.out.print("Problem checking for refreshment copy.");
         e.printStackTrace();
     }
-    //If no copy, create new row in Refreshment
+    
+    //If no duplicate record, add new record to Refreshment table
     if(copy == false) {
         
         try {
@@ -583,7 +624,7 @@ double cost) {
         }
     }
     
-    //Close resources.
+    //Close resources
     try {
             conn.close();
             ps.close();
@@ -600,6 +641,7 @@ public static void removeAllInvoices() {
 	String deleteInvoiceProducts = "DELETE FROM Invoice_Products;";
     String deleteInvoice = "DELETE FROM Invoice;";
     
+    //Delete all records from Invoice_Products and Invoice table
     try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(deleteInvoiceProducts);
@@ -612,7 +654,8 @@ public static void removeAllInvoices() {
         System.out.print("Problem deleting invoices from database.");
         e.printStackTrace();
     } 
-    //Close resources.
+    
+    //Close resources
     finally {
           try {
             ps.close();
@@ -638,6 +681,7 @@ customerCode, String salesPersonCode, String invoiceDate) {
     String testForInvoiceCopy = "SELECT * FROM Invoice WHERE InvoiceCode = ?";
     String addInvoice = "INSERT INTO Invoice(InvoiceCode, CustomerID, SalesPersonID, InvoiceDate) VALUES (?, ?, ?, ?);";
     
+    //Get id values from Persons and Customers table
     try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(getPersonID);
@@ -661,6 +705,7 @@ customerCode, String salesPersonCode, String invoiceDate) {
     rs = null;
     boolean copy = false;
     
+    //Check for duplicate record in Invoice table
     try {
         ps = conn.prepareStatement(testForInvoiceCopy);
         ps.setString(1, invoiceCode);
@@ -674,6 +719,7 @@ customerCode, String salesPersonCode, String invoiceDate) {
         e.printStackTrace();
     }
     
+    //If no duplicate record, add new record to Invoice table
     if(copy == false) {
         
         try {
@@ -688,14 +734,15 @@ customerCode, String salesPersonCode, String invoiceDate) {
             System.out.print("Problem adding invoice.");
             e.printStackTrace();
         }  
-    //Close resources.
-        try {
-        		conn.close();
-        		ps.close();
-        }
-        catch (SQLException f) {
-            	f.printStackTrace();
-        }
+        
+        //Close resources
+	    try {
+	    		conn.close();
+	    		ps.close();
+	    }
+	    catch (SQLException f) {
+	        	f.printStackTrace();
+	    }
     }
 }
 /**
@@ -719,6 +766,7 @@ String productCode, int quantity) {
 	String addDuplicate = "UPDATE Invoice_Products SET Quantity = Quantity + ? WHERE InvoiceID = ? AND MovieID = ?";
 	String insertMovie = "INSERT INTO Invoice_Products(InvoiceID, MovieID, Quantity) VALUES(?,?,?)";
 	
+	//Get id values from Invoice and Movies tables
 	try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(getInvoice);
@@ -740,6 +788,8 @@ String productCode, int quantity) {
         e.printStackTrace();
     }
 	rs = null;
+	
+	//Check for duplicate record in Invoice_Products
 	 try {
 	        ps = conn.prepareStatement(checkDuplicate);
 	        ps.setInt(1, invoiceID);
@@ -754,6 +804,7 @@ String productCode, int quantity) {
 	    }
 	rs = null;
 	
+	//If a duplicate record exists, update the existing record's quantity value
 	if(movieExists) {
 		try {
             ps = conn.prepareStatement(addDuplicate);
@@ -766,7 +817,10 @@ String productCode, int quantity) {
             System.out.print("Problem updating invoice product quantity");
             e.printStackTrace();
         } 
-	}else {
+	}
+	
+	//Else, if a duplicate record does not exist, add a new record to the Invoice_Products
+	else {
 		try {
             ps = conn.prepareStatement(insertMovie);
             ps.setInt(1, invoiceID);
@@ -780,7 +834,7 @@ String productCode, int quantity) {
         } 
 	}
 	
-	 //Close resources.
+	//Close resources
     try {
     		conn.close();
     		ps.close();
@@ -810,6 +864,7 @@ productCode, int quantity) {
 	String addDuplicate = "UPDATE Invoice_Products SET Quantity = Quantity + ? WHERE InvoiceID = ? AND SeasonPassID = ?";
 	String insertSP = "INSERT INTO Invoice_Products(InvoiceID, SeasonPassID, Quantity) VALUES(?,?,?)";
 	
+	//Get id values from Invoice and SeasonPass tables
 	try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(getInvoice);
@@ -831,6 +886,8 @@ productCode, int quantity) {
         e.printStackTrace();
     }
 	rs = null;
+	
+	//Check if a duplicate record exists in Invoice_Products
 	 try {
 	        ps = conn.prepareStatement(checkDuplicate);
 	        ps.setInt(1, invoiceID);
@@ -845,6 +902,7 @@ productCode, int quantity) {
 	    }
 	rs = null;
 	
+	//If a duplicate record exists, update the existing record's quantity value
 	if(spExists) {
 		try {
             ps = conn.prepareStatement(addDuplicate);
@@ -857,7 +915,10 @@ productCode, int quantity) {
             System.out.print("Problem updating invoice product quantity");
             e.printStackTrace();
         } 
-	}else {
+	}
+	
+	//Else, if a duplicate record does not exist, add a new record to the Invoice_Products
+	else {
 		try {
             ps = conn.prepareStatement(insertSP);
             ps.setInt(1, invoiceID);
@@ -906,6 +967,7 @@ productCode, int quantity, String ticketCode) {
 	String updateMovie = "UPDATE Invoice_Products SET ParkingMovieID = ? WHERE InvoiceID = ? AND ParkingPassID = ?";
 	String insertPP = "INSERT INTO Invoice_Products(InvoiceID, ParkingPassID, Quantity) VALUES(?,?,?)";
 	
+	//Get id values from Invoice and Parking_Pass tables
 	try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(getInvoice);
@@ -927,6 +989,8 @@ productCode, int quantity, String ticketCode) {
         e.printStackTrace();
     }
 	rs = null;
+	
+	//Check for duplicate record in Invoice_Products table
 	 try {
 	        ps = conn.prepareStatement(checkDuplicate);
 	        ps.setInt(1, invoiceID);
@@ -941,6 +1005,7 @@ productCode, int quantity, String ticketCode) {
 	    }
 	rs = null;
 	
+	//If a duplicate record exists, update the existing record's quantity value
 	if(ppExists) {
 		try {
             ps = conn.prepareStatement(addDuplicate);
@@ -953,7 +1018,9 @@ productCode, int quantity, String ticketCode) {
             System.out.print("Problem updating invoice product quantity");
             e.printStackTrace();
         } 
-	}else {
+	}
+	//Else, if a duplicate record does not exist, add a new record to the Invoice_Products
+	else {
 		try {
             ps = conn.prepareStatement(insertPP);
             ps.setInt(1, invoiceID);
@@ -967,6 +1034,7 @@ productCode, int quantity, String ticketCode) {
         } 
 	}
 	
+	//If a valid ticketCode has been passed, get the corresponding id value from the Movies table
 	if(ticketCode != null) {
 		try {
 			rs = null;
@@ -983,6 +1051,7 @@ productCode, int quantity, String ticketCode) {
             e.printStackTrace();
         }
 		
+		//Update record in Invoice_Products with the id corresponding to the movie
 		try {
             ps = conn.prepareStatement(updateMovie);
             ps.setInt(1, matchingMovieID);
@@ -996,7 +1065,7 @@ productCode, int quantity, String ticketCode) {
         }
 	}
 	
-	 //Close resources.
+	//Close resources
     try {
     		conn.close();
     		ps.close();
@@ -1027,6 +1096,7 @@ productCode, int quantity) {
 	String addDuplicate = "UPDATE Invoice_Products SET Quantity = Quantity + ? WHERE InvoiceID = ? AND RefreshmentID = ?";
 	String insertR = "INSERT INTO Invoice_Products(InvoiceID, RefreshmentID, Quantity) VALUES(?,?,?)";
 	
+	//Get id values from Invoice and Refreshment tables
 	try {
         conn = DatabaseInfo.getConnection();
         ps = conn.prepareStatement(getInvoice);
@@ -1048,6 +1118,8 @@ productCode, int quantity) {
         e.printStackTrace();
     }
 	rs = null;
+	
+	//Check for duplicate record in Invoice_Products table
 	 try {
 	        ps = conn.prepareStatement(checkDuplicate);
 	        ps.setInt(1, invoiceID);
@@ -1062,6 +1134,7 @@ productCode, int quantity) {
 	    }
 	rs = null;
 	
+	//If a duplicate record exists, update the existing record's quantity value
 	if(rExists) {
 		try {
             ps = conn.prepareStatement(addDuplicate);
@@ -1074,7 +1147,10 @@ productCode, int quantity) {
             System.out.print("Problem updating invoice product quantity");
             e.printStackTrace();
         } 
-	}else {
+	}
+	
+	//Else, if a duplicate record does not exist, add a new record to the Invoice_Products
+	else {
 		try {
             ps = conn.prepareStatement(insertR);
             ps.setInt(1, invoiceID);
@@ -1088,7 +1164,7 @@ productCode, int quantity) {
         } 
 	}
 	
-	 //Close resources.
+    //Close resources
     try {
     		conn.close();
     		ps.close();
