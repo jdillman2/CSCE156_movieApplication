@@ -96,7 +96,7 @@ public class InvoiceReport {
     	double iTotals = 0.0;
     	System.out.print("=========================\nEXECUTIVE SUMMARY REPORT\n");
     	System.out.printf("%-66s\n", "=========================");
-    	System.out.printf("%-8s %-36s %-21s %9s %10s %10s %10s %10s\n" , "Invoice", "Customer", "Salesperson", 
+    	System.out.printf("%-8s %-36s %-21s %11s %10s %10s %10s %10s\n" , "Invoice", "Customer", "Salesperson", 
     			"Subtotal", "Fees", "Taxes", "Discount","Total");
     	for(int i = 1; i <= invoices.getSize(); i++) {
         	Invoice thisInvoice = invoices.getObject(i);

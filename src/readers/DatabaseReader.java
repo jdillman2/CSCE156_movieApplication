@@ -188,7 +188,7 @@ public class DatabaseReader {
 						String description = rs.getString(3);
 						double price = rs.getDouble(5);
 						String movieTime = rs.getString(6);
-						String theatreNo = Integer.toString(rs.getInt(7));
+						String theatreNo = rs.getString(7);
 						String street = rs.getString(12);
 						String city = rs.getString(13);
 						String state = rs.getString(14);
