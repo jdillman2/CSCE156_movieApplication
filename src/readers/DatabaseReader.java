@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import com.ceg.ext.DatabaseInfo;
 
 import entities.Address;
 import entities.Customer;

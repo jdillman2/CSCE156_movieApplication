@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import readers.DatabaseInfo;
+
 /*
 *  This is a collection of utility methods that define a general API for
 *  interacting with the database supporting this application.
@@ -132,18 +134,28 @@ to the
  * @param personCode
  * @param email
  */
-public static void addEmail(int personCode , String email) {
+public static void addEmail(String personCode , String email) {
     
     String testForEmailCopy = "SELECT * FROM Email WHERE accountID = ? and email = ?;";
+    String getPersonID = "SELECT id FROM Persons WHERE personCode = ?;";
     String addEmail = "INSERT INTO Email(accountID, email) VALUES (?, ?);";
     boolean copy = false;
+    int personID = 0;
     ResultSet rs = null;
     
     //Check for record with duplicate values in Email table
     try {
         conn = DatabaseInfo.getConnection();
+        ps = conn.prepareStatement(getPersonID);
+        ps.setString(1, personCode);
+        rs = ps.executeQuery();
+        if(rs.next()) {
+        	personID = rs.getInt(1);
+        }
+        rs.close();
+        ps.close();
         ps = conn.prepareStatement(testForEmailCopy);
-        ps.setInt(1, personCode);
+        ps.setInt(1, personID);
         ps.setString(2, email);
         rs = ps.executeQuery();
         if(rs.next())
@@ -160,7 +172,7 @@ public static void addEmail(int personCode , String email) {
     {
         try {
             ps = conn.prepareStatement(addEmail);
-            ps.setInt(1, personCode);
+            ps.setInt(1, personID);
             ps.setString(2, email);
             ps.executeUpdate();
             ps.close();
@@ -295,7 +307,6 @@ String city, String state, String zip, String country) {
             rs = ps.executeQuery();
             if (rs.next()) {
                 cID = rs.getInt("id");
-                System.out.print("Got something.");
             }
         }
         catch (SQLException e) {

@@ -89,7 +89,7 @@ public class InvoiceReport {
     }
     
     private static void generateSummaryReportFromList(LinkedList<Invoice> invoices) {
-    	double iSubtotals = 0.0;
+    	double iSubtotals = 0.0; 
     	double iFees = 0.0;
     	double iTaxes = 0.0;
     	double iDiscounts = 0.0;
